@@ -26,7 +26,7 @@ async function verifyAmazonSesDomain({ context }) {
         Domain: context.inputs.domain
     };
 
-    const data = await ses.createDomainIdentity(params).promise();
+    const data = await ses.verifyDomainIdentity(params).promise();
 
     return {
         data
