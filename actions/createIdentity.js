@@ -5,7 +5,7 @@ module.exports = {
     label: 'Create identity',
     description: 'Create identity in Amazon SES to verify and use it for sending emails',
     type: 'action',
-    inputs: [
+    inputFields: [
         {
             key: 'domain',
             label: 'Domain',
@@ -17,21 +17,22 @@ module.exports = {
         type: 'code',
         source: createIdentity
     },
-    outputs: []
+    outputFields: []
 }
 
 async function createIdentity({ context }) {
-    const notificationSnsTopic = 'arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic';
-    const awsRegion = 'eu-west-1';
-
-    const ses = new AWS.SES({ region: awsRegion });
+    const ses = new AWS.SES({
+        region: context.configurationFields.awsRegion, // eu-west-1
+        accessKeyId: context.configurationFields.awsAccessKeyId,
+        secretAccessKey: context.configurationFields.awsSecretAccessKey
+    });
     const params = {
-        Domain: context.inputs.domain,
+        Domain: context.inputFields.domain,
         NotificationAttributes: {
             ForwardingEnabled: true,
-            BounceTopic: notificationSnsTopic,
-            ComplaintTopic: notificationSnsTopic,
-            DeliveryTopic: notificationSnsTopic,
+            BounceTopic: context.configurationFields.notificationSnsTopic, // arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic
+            ComplaintTopic: context.configurationFields.notificationSnsTopic, // arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic
+            DeliveryTopic: context.configurationFields.notificationSnsTopic, // arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic
             HeadersInBounceNotificationsEnabled: true,
             HeadersInComplaintNotificationsEnabled: true,
             HeadersInDeliveryNotificationsEnabled: true
