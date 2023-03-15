@@ -21,9 +21,21 @@ module.exports = {
 }
 
 async function verifyAmazonSesDomain({ context }) {
-    const ses = new AWS.SES({ region: 'eu-west-1' });
+    const notificationSnsTopic = 'arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic';
+    const awsRegion = 'eu-west-1';
+
+    const ses = new AWS.SES({ region: awsRegion });
     const params = {
-        Domain: context.inputs.domain
+        Domain: context.inputs.domain,
+        NotificationAttributes: {
+            ForwardingEnabled: true,
+            BounceTopic: notificationSnsTopic,
+            ComplaintTopic: notificationSnsTopic,
+            DeliveryTopic: notificationSnsTopic,
+            HeadersInBounceNotificationsEnabled: true,
+            HeadersInComplaintNotificationsEnabled: true,
+            HeadersInDeliveryNotificationsEnabled: true
+        }
     };
 
     const data = await ses.verifyDomainIdentity(params).promise();
