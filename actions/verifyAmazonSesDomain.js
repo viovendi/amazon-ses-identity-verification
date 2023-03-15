@@ -15,12 +15,12 @@ module.exports = {
     ],
     operation: {
         type: 'code',
-        source: verifyAmazonSesDomain
+        source: createIdentity
     },
     outputs: []
 }
 
-async function verifyAmazonSesDomain({ context }) {
+async function createIdentity({ context }) {
     const notificationSnsTopic = 'arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic';
     const awsRegion = 'eu-west-1';
 
