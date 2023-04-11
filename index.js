@@ -1,9 +1,9 @@
-var createDomainIdentity = require('./actions/createDomainIdentity');
+var verifyDomainIdentity = require('./actions/verifyDomainIdentity');
 
 module.exports = {
     title: 'Custom From Email',
     actions: [
-        createDomainIdentity
+        verifyDomainIdentity
     ],
     configurationParameters: [
         {
