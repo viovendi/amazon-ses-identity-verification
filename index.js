@@ -3,11 +3,15 @@ var verifyDomainIdentity = require('./actions/verifyDomainIdentity');
 module.exports = {
     title: 'Custom From Email',
     actions: [
-        verifyDomainIdentity
+        verifyDomainIdentity,
+        checkIfDomainIsVerifiedOnAWS,
+        checkIfDnsIsProperlyConfigured,
+        retryDomainVerificationOnAWS,
+        addEmailToDatabase
     ],
     configurationParameters: [
         {
-            key: 'AwsRegion', // eu-west-1
+            key: 'AwsRegion',
             title: 'AWS Region',
             type: 'string',
             validation: {
@@ -31,7 +35,7 @@ module.exports = {
             }
         },
         {
-            key: 'NotificationSnsTopic', // arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic
+            key: 'NotificationSnsTopic',
             title: 'Notification SNS Topic',
             type: 'string',
             validation: {
