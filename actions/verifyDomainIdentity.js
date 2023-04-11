@@ -90,6 +90,11 @@ async function verifyDomainIdentity({ inputParameters, configurationParameters }
     }).promise();
     console.log(JSON.stringify(result8));
 
+    const result9 = await ses.verifyDomainDkim({
+        Domain: inputParameters.DomainName
+    }).promise();
+    console.log(JSON.stringify(result9));
+
     return {
         DnsConfiguration: 'TODO' // TODO replace with real value
     }
