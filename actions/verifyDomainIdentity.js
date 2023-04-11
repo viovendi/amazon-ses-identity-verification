@@ -37,65 +37,67 @@ async function verifyDomainIdentity({ inputParameters, configurationParameters }
         secretAccessKey: configurationParameters.AwsSecretAccessKey
     });
 
-    const result1 = await ses.verifyDomainIdentity({
+    await ses.verifyDomainIdentity({
         Domain: inputParameters.DomainName
     }).promise();
-    console.log(JSON.stringify(result1));
 
-    const result2 = await ses.setIdentityFeedbackForwardingEnabled({
+    await ses.setIdentityFeedbackForwardingEnabled({
         Identity: inputParameters.DomainName,
         ForwardingEnabled: true
     }).promise();
-    console.log(JSON.stringify(result2));
 
-    const result3 = await ses.setIdentityNotificationTopic({
+    await ses.setIdentityNotificationTopic({
         Identity: inputParameters.DomainName,
         NotificationType: 'Bounce',
         SnsTopic: configurationParameters.NotificationSnsTopic
     }).promise();
-    console.log(JSON.stringify(result3));
 
-    const result4 = await ses.setIdentityNotificationTopic({
+    await ses.setIdentityNotificationTopic({
         Identity: inputParameters.DomainName,
         NotificationType: 'Complaint',
         SnsTopic: configurationParameters.NotificationSnsTopic
     }).promise();
-    console.log(JSON.stringify(result4));
 
-    const result5 = await ses.setIdentityNotificationTopic({
+    await ses.setIdentityNotificationTopic({
         Identity: inputParameters.DomainName,
         NotificationType: 'Delivery',
         SnsTopic: configurationParameters.NotificationSnsTopic
     }).promise();
-    console.log(JSON.stringify(result5));
 
-    const result6 = await ses.setIdentityHeadersInNotificationsEnabled({
+    await ses.setIdentityHeadersInNotificationsEnabled({
         Identity: inputParameters.DomainName,
         NotificationType: 'Bounce',
         Enabled: true
     }).promise();
-    console.log(JSON.stringify(result6));
 
-    const result7 = await ses.setIdentityHeadersInNotificationsEnabled({
+    await ses.setIdentityHeadersInNotificationsEnabled({
         Identity: inputParameters.DomainName,
         NotificationType: 'Complaint',
         Enabled: true
     }).promise();
-    console.log(JSON.stringify(result7));
 
-    const result8 = await ses.setIdentityHeadersInNotificationsEnabled({
+    await ses.setIdentityHeadersInNotificationsEnabled({
         Identity: inputParameters.DomainName,
         NotificationType: 'Delivery',
         Enabled: true
     }).promise();
-    console.log(JSON.stringify(result8));
 
-    const result9 = await ses.verifyDomainDkim({
+    const result = await ses.verifyDomainDkim({
         Domain: inputParameters.DomainName
     }).promise();
-    console.log(JSON.stringify(result9));
+
+    const dkimTokens = result.DkimTokens;
+
+    const dnsConfiguration = [];
+    for (const dkimToken of dkimTokens) {
+        dnsConfiguration.push({
+            type: 'CNAME',
+            name: `${dkimToken}._domainkey.${inputParameters.DomainName}`,
+            value: `${dkimToken}.dkim.amazonses.com`
+        });
+    }
 
     return {
-        DnsConfiguration: 'TODO' // TODO replace with real value
+        DnsConfiguration: dnsConfiguration.toString()
     }
 }
