@@ -52,7 +52,7 @@ async function verifyDomainIdentity({ inputParameters, configurationParameters }
     //    HeadersInDeliveryNotificationsEnabled: true
     //}
 
-    const result2 = ses.setIdentityFeedbackForwardingEnabled({
+    const result2 = await ses.setIdentityFeedbackForwardingEnabled({
         Identity: inputParameters.DomainName,
         ForwardingEnabled: true
     }).promise();
