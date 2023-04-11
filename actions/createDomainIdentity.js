@@ -32,18 +32,18 @@ module.exports = {
 
 async function createDomainIdentity({ inputParameters, configurationParameters }) {
     const ses = new AWS.SES({
-        region: configurationParameters.awsRegion,
-        accessKeyId: configurationParameters.awsAccessKeyId,
-        secretAccessKey: configurationParameters.awsSecretAccessKey
+        region: configurationParameters.AwsRegion,
+        accessKeyId: configurationParameters.AwsAccessKeyId,
+        secretAccessKey: configurationParameters.AwsSecretAccessKey
     });
 
     const params = {
         Domain: inputParameters.DomainName,
         NotificationAttributes: {
             ForwardingEnabled: true,
-            BounceTopic: configurationParameters.notificationSnsTopic,
-            ComplaintTopic: configurationParameters.notificationSnsTopic,
-            DeliveryTopic: configurationParameters.notificationSnsTopic,
+            BounceTopic: configurationParameters.NotificationSnsTopic,
+            ComplaintTopic: configurationParameters.NotificationSnsTopic,
+            DeliveryTopic: configurationParameters.NotificationSnsTopic,
             HeadersInBounceNotificationsEnabled: true,
             HeadersInComplaintNotificationsEnabled: true,
             HeadersInDeliveryNotificationsEnabled: true
