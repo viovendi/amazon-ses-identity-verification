@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 
 module.exports = {
-    key: 'createDomainIdentity',
+    key: 'CreateDomainIdentity',
     title: 'Create domain identity',
     type: 'action',
     inputParameters: [
@@ -51,8 +51,9 @@ async function createDomainIdentity({ inputParameters, configurationParameters }
     };
 
     const data = await ses.verifyDomainIdentity(params).promise();
+    console.log(JSON.stringify(data)); // TODO remove
 
     return {
-        data
+        DnsConfiguration: 'TODO' // TODO replace with real value
     }
 }

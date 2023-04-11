@@ -8,7 +8,7 @@ module.exports = {
     configurationParameters: [
         {
             key: 'AwsRegion', // eu-west-1
-            label: 'AWS Region',
+            title: 'AWS Region',
             type: 'string',
             validation: {
                 required: true
@@ -16,7 +16,7 @@ module.exports = {
         },
         {
             key: 'AwsAccessKeyId',
-            label: 'AWS Access Key ID',
+            title: 'AWS Access Key ID',
             type: 'string',
             validation: {
                 required: true
@@ -24,7 +24,7 @@ module.exports = {
         },
         {
             key: 'AwsSecretAccessKey',
-            label: 'AWS Secret Access Key',
+            title: 'AWS Secret Access Key',
             type: 'string',
             validation: {
                 required: true
@@ -32,7 +32,7 @@ module.exports = {
         },
         {
             key: 'NotificationSnsTopic', // arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic
-            label: 'Notification SNS Topic',
+            title: 'Notification SNS Topic',
             type: 'string',
             validation: {
                 required: true
