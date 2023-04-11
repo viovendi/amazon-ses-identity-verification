@@ -20,8 +20,9 @@ module.exports = {
     },
     outputParameters: [
         {
-            key: 'DnsConfiguration',
-            title: 'DNS configuration',
+            key: 'DnsRecords',
+            title: 'DNS records for verification',
+            description: 'After the domain identity is created, you must complete the verification process with DKIM authentication by copying the following generated CNAME records to publish to the domain’s DNS provider. Detection of these records may take up to 72 hours.', // TODO update description
             type: 'string',
             validation: {
                 required: true
@@ -88,9 +89,9 @@ async function verifyDomainIdentity({ inputParameters, configurationParameters }
 
     const dkimTokens = result.DkimTokens;
 
-    const dnsConfiguration = [];
+    const dnsRecords = [];
     for (const dkimToken of dkimTokens) {
-        dnsConfiguration.push({
+        dnsRecords.push({
             type: 'CNAME',
             name: `${dkimToken}._domainkey.${inputParameters.DomainName}`,
             value: `${dkimToken}.dkim.amazonses.com`
@@ -98,6 +99,6 @@ async function verifyDomainIdentity({ inputParameters, configurationParameters }
     }
 
     return {
-        DnsConfiguration: JSON.stringify(dnsConfiguration)
+        DnsRecords: JSON.stringify(dnsRecords)
     }
 }
