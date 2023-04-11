@@ -1,35 +1,48 @@
-var createIdentity = require('./actions/createIdentity');
+var createDomainIdentity = require('./actions/createDomainIdentity');
 
 module.exports = {
-    label: 'Amazon SES',
-    description: 'Manage Amazon SES resources',
+    title: 'Custom From Email',
     actions: [
-        createIdentity
+        createDomainIdentity
     ],
-    configurationFields: [
+    configurationParameters: [
         {
-            key: 'awsRegion',
+            key: 'AwsRegion', // eu-west-1
             label: 'AWS Region',
             type: 'string',
-            required: true
+            validation: {
+                required: true
+            }
         },
         {
-            key: 'awsAccessKeyId',
+            key: 'AwsAccessKeyId',
             label: 'AWS Access Key ID',
             type: 'string',
-            required: true
+            validation: {
+                required: true
+            }
         },
         {
-            key: 'awsSecretAccessKey',
+            key: 'AwsSecretAccessKey',
             label: 'AWS Secret Access Key',
             type: 'string',
-            required: true
+            validation: {
+                required: true
+            }
         },
         {
-            key: 'notificationSnsTopic',
+            key: 'NotificationSnsTopic', // arn:aws:sns:eu-west-1:465708500747:doo-production2-email-campaigns-ses-notifications-topic
             label: 'Notification SNS Topic',
             type: 'string',
-            required: true
+            validation: {
+                required: true
+            }
+        }
+    ],
+    maintainers: [
+        {
+            name: 'Volodymyr Machula',
+            email: 'machulav@gmail.com'
         }
     ]
 };
