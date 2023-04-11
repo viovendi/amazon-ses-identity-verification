@@ -98,6 +98,6 @@ async function verifyDomainIdentity({ inputParameters, configurationParameters }
     }
 
     return {
-        DnsConfiguration: dnsConfiguration.toString()
+        DnsConfiguration: JSON.stringify(dnsConfiguration)
     }
 }
