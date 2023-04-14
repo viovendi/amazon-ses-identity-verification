@@ -3,11 +3,16 @@ const AWS = require('aws-sdk');
 module.exports = {
     key: 'VerifyDomainIdentity',
     title: 'Verify domain identity',
+    description: `
+        The action verifies the domain identity in AWS SES. 
+        After the domain is verified, any email address that is associated with the domain can be used to send emails from doo.
+        However the email address has to be added to doo database first, so the user can select it in doo Manager when sending an email.`,
     type: 'action',
     inputParameters: [
         {
             key: 'DomainName',
             title: 'Domain name',
+            description: 'The valid domain name to verify in AWS SES.',
             type: 'string',
             validation: {
                 required: true
@@ -22,7 +27,11 @@ module.exports = {
         {
             key: 'DnsRecords',
             title: 'DNS records for verification',
-            description: 'After the domain identity is created, you must complete the verification process with DKIM authentication by copying the following generated CNAME records to publish to the domain’s DNS provider. Detection of these records may take up to 72 hours.', // TODO update description
+            description: `
+                To finish the verification process you must complete the verification process with DKIM authentication. 
+                Copy the provided DNS records and add them to the DNS configuration of the domain. 
+                It takes up to 72 hours for AWS SES to verify the domain. If the records are not added within 72 hours,
+                the verification process will fail and should be restarted.`,
             type: 'string',
             validation: {
                 required: true
@@ -32,6 +41,8 @@ module.exports = {
 }
 
 async function verifyDomainIdentity({ inputParameters, configurationParameters }) {
+    // TODO add validation for input parameters
+
     const ses = new AWS.SES({
         region: configurationParameters.AwsRegion,
         accessKeyId: configurationParameters.AwsAccessKeyId,
