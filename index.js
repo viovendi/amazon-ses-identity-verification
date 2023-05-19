@@ -4,10 +4,10 @@ module.exports = {
     title: 'Custom From Email',
     actions: [
         verifyDomainIdentity,
-        checkIfDomainIsVerifiedOnAWS,
-        checkIfDnsIsProperlyConfigured,
-        retryDomainVerificationOnAWS,
-        addEmailToDatabase
+        //checkIfDomainIsVerifiedOnAWS,
+        //checkIfDnsIsProperlyConfigured,
+        //retryDomainVerificationOnAWS,
+        //addEmailToDatabase
     ],
     configurationParameters: [
         {
