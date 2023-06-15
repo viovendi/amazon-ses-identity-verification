@@ -45,7 +45,7 @@ async function checkIfDomainIsVerified({ inputParameters, configurationParameter
         Identities: [inputParameters.DomainName]
     }).promise();
 
-    if (response.VerificationAttributes && response.VerificationAttributes[identity]) {
+    if (response.VerificationAttributes && response.VerificationAttributes[inputParameters.DomainName]) {
         const verificationStatus = response.VerificationAttributes[inputParameters.DomainName].VerificationStatus;
 
         return {
