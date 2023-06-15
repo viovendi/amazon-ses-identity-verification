@@ -7,7 +7,6 @@ module.exports = {
         verifyDomain,
         checkIfDomainIsVerified,
         //checkIfDnsIsProperlyConfigured,
-        //retryDomainVerificationOnAWS,
         //addEmailToDatabase
     ],
     configurationParameters: [
