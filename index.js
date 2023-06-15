@@ -1,10 +1,11 @@
-var verifyDomainIdentity = require('./actions/verifyDomainIdentity');
+const verifyDomain = require('./actions/verifyDomain');
+const checkIfDomainIsVerified = require('./actions/checkIfDomainIsVerified');
 
 module.exports = {
     title: 'Custom From Email',
     actions: [
-        verifyDomainIdentity,
-        //checkIfDomainIsVerifiedOnAWS,
+        verifyDomain,
+        checkIfDomainIsVerified,
         //checkIfDnsIsProperlyConfigured,
         //retryDomainVerificationOnAWS,
         //addEmailToDatabase
