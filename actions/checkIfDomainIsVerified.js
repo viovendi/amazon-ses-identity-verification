@@ -45,9 +45,14 @@ async function checkIfDomainIsVerified({ inputParameters, configurationParameter
         Identities: [inputParameters.DomainName]
     }).promise();
 
-    const verificationStatus = response.VerificationAttributes[inputParameters.DomainName].VerificationStatus;
+    if (response.VerificationAttributes && response.VerificationAttributes[identity]) {
+        const verificationStatus = response.VerificationAttributes[inputParameters.DomainName].VerificationStatus;
 
-    return {
-        VerificationStatus: verificationStatus
+        return {
+            VerificationStatus: verificationStatus
+        }
+    }
+    else {
+        throw new Error(`The domain ${inputParameters.DomainName} is not found.`);
     }
 }
