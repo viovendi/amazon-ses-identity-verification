@@ -1,11 +1,13 @@
 const verifyDomain = require('./actions/verifyDomain');
 const checkIfDomainIsVerified = require('./actions/checkIfDomainIsVerified');
+const getDomainDnsSettings = require('./actions/getDomainDnsSettings');
 
 module.exports = {
     title: 'Custom From Email',
     actions: [
         verifyDomain,
         checkIfDomainIsVerified,
+        getDomainDnsSettings,
         //checkIfDnsIsProperlyConfigured,
         //addEmailToDatabase
     ],
