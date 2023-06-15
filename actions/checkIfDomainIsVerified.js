@@ -24,7 +24,6 @@ module.exports = {
         {
             key: 'VerificationStatus',
             title: 'Verification status',
-            description: ``,
             type: 'string',
             validation: {
                 required: true
