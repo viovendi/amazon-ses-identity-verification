@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 module.exports = {
     key: 'GetDomainDnsSettings',
     title: 'Get domain DNS settings',
-    description: 'The action gets the DNS records for the domain verification.',
+    description: 'The action gets the DNS settings from AWS SES for the further domain verification.',
     type: 'action',
     inputParameters: [
         {
