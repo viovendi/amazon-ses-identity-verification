@@ -35,10 +35,6 @@ module.exports = {
 async function checkIfDomainIsVerified({ inputParameters, configurationParameters }) {
     // TODO add validation for input parameters
 
-    if (inputParameters.DomainName === 'intersupply.de') {
-        throw new Error(`111`);
-    }
-
     const ses = new AWS.SES({
         region: configurationParameters.AwsRegion,
         accessKeyId: configurationParameters.AwsAccessKeyId,
