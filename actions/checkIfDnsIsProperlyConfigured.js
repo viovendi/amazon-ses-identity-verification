@@ -62,12 +62,12 @@ async function handler({ inputParameters, configurationParameters }) {
             if (response.answers.length > 0) {
                 const actual = response.answers[0].data;
                 if (actual === expected) {
-                    results.push(`DKIM record for ${host} is set properly.`);
+                    results.push(`CNAME record for "${host}" is set properly.`);
                 } else {
-                    results.push(`DKIM record for ${host} is NOT set properly. Actual: ${actual}. Expected: ${expected}.`);
+                    results.push(`CNAME record for "${host}" is NOT set properly. Actual value: "${actual}". Expected value: "${expected}".`);
                 }
             } else {
-                results.push(`DKIM record for ${host} is NOT set. Expected: ${expected}.`);
+                results.push(`CNAME record for "${host}" is NOT set. Expected value: "${expected}".`);
             }
         }
     }
