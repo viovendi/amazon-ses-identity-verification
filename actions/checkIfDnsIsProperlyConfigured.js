@@ -46,7 +46,7 @@ async function handler({ inputParameters, configurationParameters }) {
     });
 
     const result = await ses.getIdentityDkimAttributes({
-        Identities: inputParameters.DomainName
+        Identities: [inputParameters.DomainName]
     }).promise();
 
     const dkimAttributes = result.DkimAttributes;
