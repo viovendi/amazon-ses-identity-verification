@@ -18,7 +18,7 @@ module.exports = {
     ],
     operation: {
         type: 'js',
-        handler: checkIfDomainIsVerified
+        handler
     },
     outputParameters: [
         {
@@ -32,7 +32,7 @@ module.exports = {
     ]
 }
 
-async function checkIfDomainIsVerified({ inputParameters, configurationParameters }) {
+async function handler({ inputParameters, configurationParameters }) {
     // TODO add validation for input parameters
 
     const ses = new AWS.SES({

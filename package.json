@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "aws-sdk": "^2.1335.0"
+    "aws-sdk": "^2.1335.0",
+    "dgram": "^1.0.1",
+    "dns-packet": "^5.6.0"
   }
 }

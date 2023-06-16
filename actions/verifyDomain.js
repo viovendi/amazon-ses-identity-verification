@@ -23,7 +23,7 @@ module.exports = {
     ],
     operation: {
         type: 'js',
-        handler: verifyDomain
+        handler
     },
     outputParameters: [
         {
@@ -42,7 +42,7 @@ module.exports = {
     ]
 }
 
-async function verifyDomain({ inputParameters, configurationParameters }) {
+async function handler({ inputParameters, configurationParameters }) {
     // TODO add validation for input parameters
 
     const ses = new AWS.SES({

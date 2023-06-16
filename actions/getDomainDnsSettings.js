@@ -18,7 +18,7 @@ module.exports = {
     ],
     operation: {
         type: 'js',
-        handler: getDomainDnsSettings
+        handler
     },
     outputParameters: [
         {
@@ -37,7 +37,7 @@ module.exports = {
     ]
 }
 
-async function getDomainDnsSettings({ inputParameters, configurationParameters }) {
+async function handler({ inputParameters, configurationParameters }) {
     // TODO add validation for input parameters
 
     const ses = new AWS.SES({
