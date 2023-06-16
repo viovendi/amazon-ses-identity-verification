@@ -45,7 +45,7 @@ async function handler({ inputParameters, configurationParameters }) {
         secretAccessKey: configurationParameters.AwsSecretAccessKey
     });
 
-    const result = await ses.describeIdentityDkimAttributes({
+    const result = await ses.getIdentityDkimAttributes({
         Domain: inputParameters.DomainName
     }).promise();
 
