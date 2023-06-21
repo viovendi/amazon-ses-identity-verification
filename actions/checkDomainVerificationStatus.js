@@ -1,12 +1,12 @@
 const AWS = require('aws-sdk');
 
 module.exports = {
-    key: 'CheckIfDomainIsVerified',
-    title: 'Check if domain is verified',
+    key: 'CheckDomainVerificationStatus',
+    title: 'Check domain verification status',
     description: `
         The action returns the verification status of the domain. 
-        If the status "Not found" is returned, then the domain does not exist in the AWS SES.
-        "Not found" does not equal to "Not verified".`,
+        Available statuses: "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted", "NotFound".
+        If the status "NotFound", then the domain does not exist in the AWS SES.`,
     type: 'action',
     inputParameters: [
         {
@@ -53,7 +53,7 @@ async function handler({ inputParameters, configurationParameters }) {
         verificationStatus = response.VerificationAttributes[inputParameters.DomainName].VerificationStatus;
     }
     else {
-        verificationStatus = 'Not found';
+        verificationStatus = 'NotFound';
     }
 
     return {
