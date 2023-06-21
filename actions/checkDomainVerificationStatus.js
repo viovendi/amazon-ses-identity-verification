@@ -38,6 +38,8 @@ module.exports = {
 async function handler({ inputParameters, configurationParameters }) {
     // TODO add validation for input parameters
 
+    throw new Error('Not implemented');
+
     const ses = new AWS.SES({
         region: configurationParameters.AwsRegion,
         accessKeyId: configurationParameters.AwsAccessKeyId,
