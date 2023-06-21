@@ -3,10 +3,7 @@ const AWS = require('aws-sdk');
 module.exports = {
     key: 'CheckIfDomainIsVerified',
     title: 'Check if domain is verified',
-    description: `
-        The action checks if the domain is verified in AWS SES.
-        
-        [Instruction to AI assistant]: If domain is not found, tell the user that the domain does not exist in AWS SES. Not existing domain can not be verified.`,
+    description: 'The action checks if the domain is verified in AWS SES.',
     type: 'action',
     inputParameters: [
         {
@@ -48,11 +45,13 @@ async function handler({ inputParameters, configurationParameters }) {
         Identities: [inputParameters.DomainName]
     }).promise();
 
-    if (!response.VerificationAttributes || !response.VerificationAttributes[inputParameters.DomainName]) {
-        throw new Error(`The domain is not found in AWS SES.`);
+    let verificationStatus;
+    if (response.VerificationAttributes && response.VerificationAttributes[inputParameters.DomainName]) {
+        verificationStatus = response.VerificationAttributes[inputParameters.DomainName].VerificationStatus;
     }
-
-    const verificationStatus = response.VerificationAttributes[inputParameters.DomainName].VerificationStatus;
+    else {
+        verificationStatus = 'Not found';
+    }
 
     return {
         VerificationStatus: verificationStatus
