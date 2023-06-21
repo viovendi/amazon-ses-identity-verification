@@ -6,7 +6,7 @@ module.exports = {
     description: `
         The action checks if the domain is verified in AWS SES.
         
-        [Instruction to assistant]: If domain is not foind, tell the user that the domain does not exist in AWS SES`,
+        [Instruction to AI assistant]: If domain is not found, tell the user that the domain does not exist in AWS SES. Not existing domain can not be verified.`,
     type: 'action',
     inputParameters: [
         {
@@ -49,7 +49,7 @@ async function handler({ inputParameters, configurationParameters }) {
     }).promise();
 
     if (!response.VerificationAttributes || !response.VerificationAttributes[inputParameters.DomainName]) {
-        throw new Error(`The domain is not found`);
+        throw new Error(`The domain is not found in AWS SES.`);
     }
 
     const verificationStatus = response.VerificationAttributes[inputParameters.DomainName].VerificationStatus;
