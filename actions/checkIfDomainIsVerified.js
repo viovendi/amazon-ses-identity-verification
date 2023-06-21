@@ -5,7 +5,8 @@ module.exports = {
     title: 'Check if domain is verified',
     description: `
         The action returns the verification status of the domain. 
-        If the status "Not found" is returned, then the domain does not exist in the AWS SES.`,
+        If the status "Not found" is returned, then the domain does not exist in the AWS SES.
+        "Not found" does not equal to "Not verified".`,
     type: 'action',
     inputParameters: [
         {
