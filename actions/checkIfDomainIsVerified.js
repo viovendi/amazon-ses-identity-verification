@@ -3,7 +3,9 @@ const AWS = require('aws-sdk');
 module.exports = {
     key: 'CheckIfDomainIsVerified',
     title: 'Check if domain is verified',
-    description: 'The action checks if the domain is verified in AWS SES.',
+    description: `
+        The action returns the verification status of the domain. 
+        If the status "Not found" is returned, then the domain does not exist in the AWS SES.`,
     type: 'action',
     inputParameters: [
         {
