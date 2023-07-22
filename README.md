@@ -1,10 +1,10 @@
 # Connery connector for Amazon SES identity verification
 
-## List of available actions
+## Actions
 
 See the list of available actions in the [connector definition file](index.js).
 
-## Installation on a Connery runner
+## Installation
 
 To install the connector on your Connery runner, add it to the runner configuration file and specify all the required configuration parameters.
 
