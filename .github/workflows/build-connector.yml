@@ -1,4 +1,4 @@
-name: Build Connector
+name: Build connector
 
 on:
   push:
@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   build-connector:
-    name: Build Connector
+    name: Build connector
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,6 +24,10 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: npm install
+
+      - name: Build connector
+        shell: bash
+        run: npm run build
 
       - name: Commit
         run: |
