@@ -40,6 +40,7 @@ module.exports = {
 
 async function handler({ inputParameters, configurationParameters }) {
     // TODO add validation for input parameters
+
     var results = [];
 
     const ses = new AWS.SES({

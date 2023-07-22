@@ -9,8 +9,7 @@ module.exports = {
         verifyDomain,
         checkDomainVerificationStatus,
         getDomainDnsSettings,
-        checkIfDnsIsProperlyConfigured,
-        //addEmailToDatabase
+        checkIfDnsIsProperlyConfigured
     ],
     configurationParameters: [
         {
