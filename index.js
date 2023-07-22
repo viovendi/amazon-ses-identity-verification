@@ -4,7 +4,7 @@ const getDomainDnsSettings = require('./actions/getDomainDnsSettings');
 const checkIfDnsIsProperlyConfigured = require('./actions/checkIfDnsIsProperlyConfigured');
 
 module.exports = {
-    title: 'Custom From Email',
+    title: 'Amazon SES Identity Verification',
     actions: [
         verifyDomain,
         checkDomainVerificationStatus,
