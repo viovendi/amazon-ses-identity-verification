@@ -4,7 +4,7 @@ module.exports = {
     key: 'GetDomainDnsSettings',
     title: 'Get domain DNS settings',
     description: 'The action gets the DNS settings from AWS SES for the further domain verification.',
-    type: 'action',
+    type: 'read',
     inputParameters: [
         {
             key: 'DomainName',

@@ -9,7 +9,7 @@ module.exports = {
         The action checks if the DNS records for the domain are properly configured on the DNS server responsible for the domain.
         Properly configured DNS recodrs does not mean that the domain is verified on AWS, but it does mean that the domain will be verified on AWS soon.
         To check if the domain is verified on AWS, use the CheckDomainVerificationStatus action.`,
-    type: 'action',
+    type: 'read',
     inputParameters: [
         {
             key: 'DomainName',

@@ -9,7 +9,7 @@ module.exports = {
         The DNS records must be added to the DNS configuration of the domain to finish the domain verification process.
         Only after the domain is verified, it can be used to send emails with custom MAIL FROM address.
         If the domain verification is failed, you can restart the verification process by running the action again.`,
-    type: 'action',
+    type: 'create',
     inputParameters: [
         {
             key: 'DomainName',
