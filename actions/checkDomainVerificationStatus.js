@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 
 module.exports = {
-    key: 'CheckDomainVerificationStatus',
+    key: '1CheckDomainVerificationStatus',
     title: 'Check domain verification status',
     description: `
         The action returns the verification status of the domain. 
