@@ -1,9 +1,10 @@
 {
   "name": "amazon-ses-identity-verification",
+  "description": "Amazon SES identity verification connector for Connery",
   "license": "MIT",
   "author": {
     "name": "Connery",
-    "email": "support@connery.io"
+    "email": "contact@connery.io"
   },
   "dependencies": {
     "aws-sdk": "^2.1335.0",
@@ -11,9 +12,10 @@
     "dns-packet": "^5.6.0"
   },
   "devDependencies": {
-    "@connery-io/cli": "^0.0.2"
+    "connery": "*",
+    "jest": "^29.6.1"
   },
   "scripts": {
-    "build": "connery build"
+    "build": "jest --passWithNoTests && connery validate && connery build"
   }
 }

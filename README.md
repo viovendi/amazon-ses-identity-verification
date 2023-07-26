@@ -1,4 +1,6 @@
-# Connery connector for Amazon SES identity verification
+# Amazon SES identity verification
+
+Amazon SES identity verification connector for Connery
 
 ## Actions
 

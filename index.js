@@ -51,8 +51,11 @@ module.exports = {
     ],
     maintainers: [
         {
-            name: 'Volodymyr Machula',
-            email: 'machulav@gmail.com'
+            name: 'Connery',
+            email: 'contact@connery.io'
         }
-    ]
+    ],
+    connery: {
+        runnerVersion: '1'
+    }
 };
