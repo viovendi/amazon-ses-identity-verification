@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": {
     "name": "Connery",
-    "email": "contact@connery.io"
+    "email": "support@connery.io"
   },
   "dependencies": {
     "aws-sdk": "^2.1335.0",

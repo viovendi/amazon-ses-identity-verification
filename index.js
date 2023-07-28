@@ -52,7 +52,7 @@ module.exports = {
     maintainers: [
         {
             name: 'Connery',
-            email: 'contact@connery.io'
+            email: 'support@connery.io'
         }
     ],
     connery: {
