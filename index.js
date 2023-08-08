@@ -22,24 +22,6 @@ module.exports = {
             }
         },
         {
-            key: 'AwsAccessKeyId',
-            title: 'AWS Access Key ID',
-            description: 'The AWS access key ID with permissions to verify the domain.',
-            type: 'string',
-            validation: {
-                required: true
-            }
-        },
-        {
-            key: 'AwsSecretAccessKey',
-            title: 'AWS Secret Access Key',
-            description: 'The AWS secret access key with permissions to verify the domain.',
-            type: 'string',
-            validation: {
-                required: true
-            }
-        },
-        {
             key: 'NotificationSnsTopic',
             title: 'Notification SNS Topic',
             description: 'The SNS topic ARN to which the identity notification will be sent',
@@ -47,6 +29,18 @@ module.exports = {
             validation: {
                 required: true
             }
+        },
+        {
+            key: 'AwsAccessKeyId',
+            title: 'AWS Access Key ID',
+            description: 'The AWS access key ID with permissions to verify the domain. If not provided, the IAM role attached to the runner will be used.',
+            type: 'string'
+        },
+        {
+            key: 'AwsSecretAccessKey',
+            title: 'AWS Secret Access Key',
+            description: 'The AWS secret access key with permissions to verify the domain. If not provided, the IAM role attached to the runner will be used.',
+            type: 'string',
         }
     ],
     maintainers: [
