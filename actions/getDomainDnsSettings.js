@@ -1,4 +1,6 @@
-const AWS = require('aws-sdk');
+const {
+    SES
+} = require("@aws-sdk/client-ses");
 
 module.exports = {
     key: 'GetDomainDnsSettings',
@@ -40,7 +42,7 @@ module.exports = {
 async function handler({ inputParameters, configurationParameters }) {
     // TODO add validation for input parameters
 
-    const ses = new AWS.SES({
+    const ses = new SES({
         region: configurationParameters.AwsRegion,
         accessKeyId: configurationParameters.AwsAccessKeyId,
         secretAccessKey: configurationParameters.AwsSecretAccessKey
@@ -48,7 +50,7 @@ async function handler({ inputParameters, configurationParameters }) {
 
     const result = await ses.verifyDomainDkim({
         Domain: inputParameters.DomainName
-    }).promise();
+    });
 
     const dkimTokens = result.DkimTokens;
 

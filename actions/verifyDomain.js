@@ -1,4 +1,6 @@
-const AWS = require('aws-sdk');
+const {
+    SES
+} = require("@aws-sdk/client-ses");
 
 module.exports = {
     key: 'VerifyDomain',
@@ -45,7 +47,7 @@ module.exports = {
 async function handler({ inputParameters, configurationParameters }) {
     // TODO add validation for input parameters
 
-    const ses = new AWS.SES({
+    const ses = new SES({
         region: configurationParameters.AwsRegion,
         accessKeyId: configurationParameters.AwsAccessKeyId,
         secretAccessKey: configurationParameters.AwsSecretAccessKey
@@ -53,52 +55,52 @@ async function handler({ inputParameters, configurationParameters }) {
 
     await ses.verifyDomainIdentity({
         Domain: inputParameters.DomainName
-    }).promise();
+    });
 
     await ses.setIdentityFeedbackForwardingEnabled({
         Identity: inputParameters.DomainName,
         ForwardingEnabled: true
-    }).promise();
+    });
 
     await ses.setIdentityNotificationTopic({
         Identity: inputParameters.DomainName,
         NotificationType: 'Bounce',
         SnsTopic: configurationParameters.NotificationSnsTopic
-    }).promise();
+    });
 
     await ses.setIdentityNotificationTopic({
         Identity: inputParameters.DomainName,
         NotificationType: 'Complaint',
         SnsTopic: configurationParameters.NotificationSnsTopic
-    }).promise();
+    });
 
     await ses.setIdentityNotificationTopic({
         Identity: inputParameters.DomainName,
         NotificationType: 'Delivery',
         SnsTopic: configurationParameters.NotificationSnsTopic
-    }).promise();
+    });
 
     await ses.setIdentityHeadersInNotificationsEnabled({
         Identity: inputParameters.DomainName,
         NotificationType: 'Bounce',
         Enabled: true
-    }).promise();
+    });
 
     await ses.setIdentityHeadersInNotificationsEnabled({
         Identity: inputParameters.DomainName,
         NotificationType: 'Complaint',
         Enabled: true
-    }).promise();
+    });
 
     await ses.setIdentityHeadersInNotificationsEnabled({
         Identity: inputParameters.DomainName,
         NotificationType: 'Delivery',
         Enabled: true
-    }).promise();
+    });
 
     const result = await ses.verifyDomainDkim({
         Domain: inputParameters.DomainName
-    }).promise();
+    });
 
     const dkimTokens = result.DkimTokens;
 

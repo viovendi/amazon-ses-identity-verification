@@ -1,4 +1,6 @@
-const AWS = require('aws-sdk');
+const {
+    SES
+} = require("@aws-sdk/client-ses");
 const dnsPacket = require('dns-packet');
 const dgram = require('dgram');
 
@@ -43,7 +45,7 @@ async function handler({ inputParameters, configurationParameters }) {
 
     var results = [];
 
-    const ses = new AWS.SES({
+    const ses = new SES({
         region: configurationParameters.AwsRegion,
         accessKeyId: configurationParameters.AwsAccessKeyId,
         secretAccessKey: configurationParameters.AwsSecretAccessKey
@@ -51,7 +53,7 @@ async function handler({ inputParameters, configurationParameters }) {
 
     const result = await ses.getIdentityDkimAttributes({
         Identities: [inputParameters.DomainName]
-    }).promise();
+    });
 
     const dkimAttributes = result.DkimAttributes;
 
