@@ -45,8 +45,8 @@ module.exports = {
     ],
     maintainers: [
         {
-            name: 'Connery',
-            email: 'support@connery.io'
+            name: 'doo',
+            email: 'support@doo.net'
         }
     ],
     connery: {

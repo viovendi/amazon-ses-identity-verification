@@ -3,8 +3,8 @@
   "description": "Amazon SES identity verification connector for Connery",
   "license": "MIT",
   "author": {
-    "name": "Connery",
-    "email": "support@connery.io"
+    "name": "doo",
+    "email": "support@doo.net"
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.387.0",
