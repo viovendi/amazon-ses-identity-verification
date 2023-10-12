@@ -5,12 +5,7 @@ const {
 module.exports = {
     key: 'VerifyDomain',
     title: 'Verify domain',
-    description: `
-        The action adds the domain to AWS SES for the futrther verification.
-        After the domain is added to AWS SES, the DNS records are provided.
-        The DNS records must be added to the DNS configuration of the domain to finish the domain verification process.
-        Only after the domain is verified, it can be used to send emails with custom MAIL FROM address.
-        If the domain verification is failed, you can restart the verification process by running the action again.`,
+    description: 'The action adds the domain to AWS SES for the futrther verification. After the domain is added to AWS SES, the DNS records are provided. The DNS records must be added to the DNS configuration of the domain to finish the domain verification process. Only after the domain is verified, it can be used to send emails with custom MAIL FROM address. If the domain verification is failed, you can restart the verification process by running the action again.',
     type: 'create',
     inputParameters: [
         {
@@ -31,11 +26,7 @@ module.exports = {
         {
             key: 'DnsRecords',
             title: 'DNS records for verification',
-            description: `
-                To finish the verification process you must complete the verification process with DKIM authentication. 
-                Copy the provided DNS records and add them to the DNS configuration of the domain. 
-                It takes up to 72 hours for AWS SES to verify if the DNS records are added. If the records are not added within 72 hours,
-                the verification process will fail and should be restarted.`,
+            description: 'To finish the verification process you must complete the verification process with DKIM authentication. Copy the provided DNS records and add them to the DNS configuration of the domain. It takes up to 72 hours for AWS SES to verify if the DNS records are added. If the records are not added within 72 hours, the verification process will fail and should be restarted.',
             type: 'string',
             validation: {
                 required: true

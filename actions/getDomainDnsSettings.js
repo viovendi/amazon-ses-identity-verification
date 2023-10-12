@@ -26,11 +26,7 @@ module.exports = {
         {
             key: 'DnsRecords',
             title: 'DNS records for verification',
-            description: `
-                To finish the verification process you must complete the verification process with DKIM authentication. 
-                Copy the provided DNS records and add them to the DNS configuration of the domain. 
-                It takes up to 72 hours for AWS SES to verify if the DNS records are added. If the records are not added within 72 hours,
-                the verification process will fail and should be restarted.`,
+            description: 'To finish the verification process you must complete the verification process with DKIM authentication. Copy the provided DNS records and add them to the DNS configuration of the domain. It takes up to 72 hours for AWS SES to verify if the DNS records are added. If the records are not added within 72 hours, the verification process will fail and should be restarted.',
             type: 'string',
             validation: {
                 required: true

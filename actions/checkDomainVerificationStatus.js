@@ -5,10 +5,7 @@ const {
 module.exports = {
     key: 'CheckDomainVerificationStatus',
     title: 'Check domain verification status',
-    description: `
-        The action returns the verification status of the domain. 
-        Available statuses: "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted", "NotFound".
-        If the status "NotFound", then the domain does not exist in the AWS SES.`,
+    description: 'The action returns the verification status of the domain. Available statuses: "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted", "NotFound". If the status "NotFound", then the domain does not exist in the AWS SES.',
     type: 'read',
     inputParameters: [
         {
