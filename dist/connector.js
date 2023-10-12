@@ -6,15 +6,12 @@
 
 const {
     SES
-} = __webpack_require__(368);
+} = __webpack_require__(408);
 
 module.exports = {
     key: 'CheckDomainVerificationStatus',
     title: 'Check domain verification status',
-    description: `
-        The action returns the verification status of the domain. 
-        Available statuses: "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted", "NotFound".
-        If the status "NotFound", then the domain does not exist in the AWS SES.`,
+    description: 'The action returns the verification status of the domain. Available statuses: "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted", "NotFound". If the status "NotFound", then the domain does not exist in the AWS SES.',
     type: 'read',
     inputParameters: [
         {
@@ -76,17 +73,14 @@ async function handler({ inputParameters, configurationParameters }) {
 
 const {
     SES
-} = __webpack_require__(368);
+} = __webpack_require__(408);
 const dnsPacket = __webpack_require__(568);
 const dgram = __webpack_require__(891);
 
 module.exports = {
     key: 'CheckIfDnsIsProperlyConfigured',
     title: 'Check if DNS for domain is properly configured',
-    description: `
-        The action checks if the DNS records for the domain are properly configured on the DNS server responsible for the domain.
-        Properly configured DNS recodrs does not mean that the domain is verified on AWS, but it does mean that the domain will be verified on AWS soon.
-        To check if the domain is verified on AWS, use the CheckDomainVerificationStatus action.`,
+    description: 'The action checks if the DNS records for the domain are properly configured on the DNS server responsible for the domain. Properly configured DNS recodrs does not mean that the domain is verified on AWS, but it does mean that the domain will be verified on AWS soon. To check if the domain is verified on AWS, use the CheckDomainVerificationStatus action.',
     type: 'read',
     inputParameters: [
         {
@@ -191,7 +185,7 @@ async function checkDnsRecord(host, type) {
 
 const {
     SES
-} = __webpack_require__(368);
+} = __webpack_require__(408);
 
 module.exports = {
     key: 'GetDomainDnsSettings',
@@ -217,11 +211,7 @@ module.exports = {
         {
             key: 'DnsRecords',
             title: 'DNS records for verification',
-            description: `
-                To finish the verification process you must complete the verification process with DKIM authentication. 
-                Copy the provided DNS records and add them to the DNS configuration of the domain. 
-                It takes up to 72 hours for AWS SES to verify if the DNS records are added. If the records are not added within 72 hours,
-                the verification process will fail and should be restarted.`,
+            description: 'To finish the verification process you must complete the verification process with DKIM authentication. Copy the provided DNS records and add them to the DNS configuration of the domain. It takes up to 72 hours for AWS SES to verify if the DNS records are added. If the records are not added within 72 hours, the verification process will fail and should be restarted.',
             type: 'string',
             validation: {
                 required: true
@@ -266,17 +256,12 @@ async function handler({ inputParameters, configurationParameters }) {
 
 const {
     SES
-} = __webpack_require__(368);
+} = __webpack_require__(408);
 
 module.exports = {
     key: 'VerifyDomain',
     title: 'Verify domain',
-    description: `
-        The action adds the domain to AWS SES for the futrther verification.
-        After the domain is added to AWS SES, the DNS records are provided.
-        The DNS records must be added to the DNS configuration of the domain to finish the domain verification process.
-        Only after the domain is verified, it can be used to send emails with custom MAIL FROM address.
-        If the domain verification is failed, you can restart the verification process by running the action again.`,
+    description: 'The action adds the domain to AWS SES for the futrther verification. After the domain is added to AWS SES, the DNS records are provided. The DNS records must be added to the DNS configuration of the domain to finish the domain verification process. Only after the domain is verified, it can be used to send emails with custom MAIL FROM address. If the domain verification is failed, you can restart the verification process by running the action again.',
     type: 'create',
     inputParameters: [
         {
@@ -297,11 +282,7 @@ module.exports = {
         {
             key: 'DnsRecords',
             title: 'DNS records for verification',
-            description: `
-                To finish the verification process you must complete the verification process with DKIM authentication. 
-                Copy the provided DNS records and add them to the DNS configuration of the domain. 
-                It takes up to 72 hours for AWS SES to verify if the DNS records are added. If the records are not added within 72 hours,
-                the verification process will fail and should be restarted.`,
+            description: 'To finish the verification process you must complete the verification process with DKIM authentication. Copy the provided DNS records and add them to the DNS configuration of the domain. It takes up to 72 hours for AWS SES to verify if the DNS records are added. If the records are not added within 72 hours, the verification process will fail and should be restarted.',
             type: 'string',
             validation: {
                 required: true
@@ -974,7 +955,7 @@ exports.uint32ArrayFrom = uint32ArrayFrom;
 
 /***/ }),
 
-/***/ 368:
+/***/ 408:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1249,6 +1230,17 @@ var http_FieldPosition;
     FieldPosition[FieldPosition["HEADER"] = 0] = "HEADER";
     FieldPosition[FieldPosition["TRAILER"] = 1] = "TRAILER";
 })(http_FieldPosition || (http_FieldPosition = {}));
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/types/dist-es/middleware.js
+const middleware_SMITHY_CONTEXT_KEY = "__smithy_context";
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/types/dist-es/profile.js
+var IniSectionType;
+(function (IniSectionType) {
+    IniSectionType["PROFILE"] = "profile";
+    IniSectionType["SSO_SESSION"] = "sso-session";
+    IniSectionType["SERVICES"] = "services";
+})(IniSectionType || (IniSectionType = {}));
 
 ;// CONCATENATED MODULE: ./node_modules/@smithy/types/dist-es/transfer.js
 var RequestHandlerProtocol;
@@ -2001,6 +1993,10 @@ class SmithyMessageEncoderStream {
 
 
 
+;// CONCATENATED MODULE: ./node_modules/@smithy/util-middleware/dist-es/getSmithyContext.js
+
+const getSmithyContext = (context) => context[SMITHY_CONTEXT_KEY] || (context[SMITHY_CONTEXT_KEY] = {});
+
 ;// CONCATENATED MODULE: ./node_modules/@smithy/util-middleware/dist-es/normalizeProvider.js
 const normalizeProvider_normalizeProvider = (input) => {
     if (typeof input === "function")
@@ -2008,6 +2004,10 @@ const normalizeProvider_normalizeProvider = (input) => {
     const promisified = Promise.resolve(input);
     return () => promisified;
 };
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/util-middleware/dist-es/index.js
+
+
 
 ;// CONCATENATED MODULE: ./node_modules/@smithy/is-array-buffer/dist-es/index.js
 const isArrayBuffer = (arg) => (typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer) ||
@@ -3444,6 +3444,36 @@ const NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS = {
     default: false,
 };
 
+;// CONCATENATED MODULE: ./node_modules/@smithy/config-resolver/dist-es/endpointsConfig/resolveCustomEndpointsConfig.js
+
+const resolveCustomEndpointsConfig = (input) => {
+    const { endpoint, urlParser } = input;
+    return {
+        ...input,
+        tls: input.tls ?? true,
+        endpoint: normalizeProvider(typeof endpoint === "string" ? urlParser(endpoint) : endpoint),
+        isCustomEndpoint: true,
+        useDualstackEndpoint: normalizeProvider(input.useDualstackEndpoint ?? false),
+    };
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/config-resolver/dist-es/endpointsConfig/resolveEndpointsConfig.js
+
+
+const resolveEndpointsConfig = (input) => {
+    const useDualstackEndpoint = normalizeProvider(input.useDualstackEndpoint ?? false);
+    const { endpoint, useFipsEndpoint, urlParser } = input;
+    return {
+        ...input,
+        tls: input.tls ?? true,
+        endpoint: endpoint
+            ? normalizeProvider(typeof endpoint === "string" ? urlParser(endpoint) : endpoint)
+            : () => getEndpointFromRegion({ ...input, useDualstackEndpoint, useFipsEndpoint }),
+        isCustomEndpoint: !!endpoint,
+        useDualstackEndpoint,
+    };
+};
+
 ;// CONCATENATED MODULE: ./node_modules/@smithy/config-resolver/dist-es/endpointsConfig/index.js
 
 
@@ -3552,72 +3582,6 @@ const getContentLengthPlugin = (options) => ({
     },
 });
 
-;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-serde/dist-es/deserializerMiddleware.js
-const deserializerMiddleware = (options, deserializer) => (next, context) => async (args) => {
-    const { response } = await next(args);
-    try {
-        const parsed = await deserializer(response, options);
-        return {
-            response,
-            output: parsed,
-        };
-    }
-    catch (error) {
-        Object.defineProperty(error, "$response", {
-            value: response,
-        });
-        if (!("$metadata" in error)) {
-            const hint = `Deserialization error: to see the raw response, inspect the hidden field {error}.$response on this object.`;
-            error.message += "\n  " + hint;
-        }
-        throw error;
-    }
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-serde/dist-es/serializerMiddleware.js
-const serializerMiddleware = (options, serializer) => (next, context) => async (args) => {
-    const endpoint = context.endpointV2?.url && options.urlParser
-        ? async () => options.urlParser(context.endpointV2.url)
-        : options.endpoint;
-    if (!endpoint) {
-        throw new Error("No valid endpoint provider available.");
-    }
-    const request = await serializer(args.input, { ...options, endpoint });
-    return next({
-        ...args,
-        request,
-    });
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-serde/dist-es/serdePlugin.js
-
-
-const deserializerMiddlewareOption = {
-    name: "deserializerMiddleware",
-    step: "deserialize",
-    tags: ["DESERIALIZER"],
-    override: true,
-};
-const serializerMiddlewareOption = {
-    name: "serializerMiddleware",
-    step: "serialize",
-    tags: ["SERIALIZER"],
-    override: true,
-};
-function getSerdePlugin(config, serializer, deserializer) {
-    return {
-        applyToStack: (commandStack) => {
-            commandStack.add(deserializerMiddleware(config, deserializer), deserializerMiddlewareOption);
-            commandStack.add(serializerMiddleware(config, serializer), serializerMiddlewareOption);
-        },
-    };
-}
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-serde/dist-es/index.js
-
-
-
-
 ;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/service-customizations/s3.js
 const resolveParamsForS3 = async (endpointParams) => {
     const bucket = endpointParams?.Bucket || "";
@@ -3684,86 +3648,379 @@ const createConfigValueProvider = (configKey, canonicalEndpointParamKey, config)
     return configProvider;
 };
 
-;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/adaptors/getEndpointFromInstructions.js
-
-
-const getEndpointFromInstructions = async (commandInput, instructionsSupplier, clientConfig, context) => {
-    const endpointParams = await resolveParams(commandInput, instructionsSupplier, clientConfig);
-    if (typeof clientConfig.endpointProvider !== "function") {
-        throw new Error("config.endpointProvider is not set.");
+;// CONCATENATED MODULE: ./node_modules/@smithy/property-provider/dist-es/ProviderError.js
+class ProviderError extends Error {
+    constructor(message, tryNextLink = true) {
+        super(message);
+        this.tryNextLink = tryNextLink;
+        this.name = "ProviderError";
+        Object.setPrototypeOf(this, ProviderError.prototype);
     }
-    const endpoint = clientConfig.endpointProvider(endpointParams, context);
-    return endpoint;
-};
-const resolveParams = async (commandInput, instructionsSupplier, clientConfig) => {
-    const endpointParams = {};
-    const instructions = instructionsSupplier?.getEndpointParameterInstructions?.() || {};
-    for (const [name, instruction] of Object.entries(instructions)) {
-        switch (instruction.type) {
-            case "staticContextParams":
-                endpointParams[name] = instruction.value;
-                break;
-            case "contextParams":
-                endpointParams[name] = commandInput[instruction.name];
-                break;
-            case "clientContextParams":
-            case "builtInParams":
-                endpointParams[name] = await createConfigValueProvider(instruction.name, name, clientConfig)();
-                break;
-            default:
-                throw new Error("Unrecognized endpoint parameter instruction: " + JSON.stringify(instruction));
+    static from(error, tryNextLink = true) {
+        return Object.assign(new this(error.message, tryNextLink), error);
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/property-provider/dist-es/chain.js
+
+const chain = (...providers) => async () => {
+    if (providers.length === 0) {
+        throw new ProviderError("No providers in chain");
+    }
+    let lastProviderError;
+    for (const provider of providers) {
+        try {
+            const credentials = await provider();
+            return credentials;
+        }
+        catch (err) {
+            lastProviderError = err;
+            if (err?.tryNextLink) {
+                continue;
+            }
+            throw err;
         }
     }
-    if (Object.keys(instructions).length === 0) {
-        Object.assign(endpointParams, clientConfig);
-    }
-    if (String(clientConfig.serviceId).toLowerCase() === "s3") {
-        await resolveParamsForS3(endpointParams);
-    }
-    return endpointParams;
+    throw lastProviderError;
 };
 
-;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/endpointMiddleware.js
+;// CONCATENATED MODULE: ./node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
 
-const endpointMiddleware = ({ config, instructions, }) => {
-    return (next, context) => async (args) => {
-        const endpoint = await getEndpointFromInstructions(args.input, {
-            getEndpointParameterInstructions() {
-                return instructions;
-            },
-        }, { ...config }, context);
-        context.endpointV2 = endpoint;
-        context.authSchemes = endpoint.properties?.authSchemes;
-        const authScheme = context.authSchemes?.[0];
-        if (authScheme) {
-            context["signing_region"] = authScheme.signingRegion;
-            context["signing_service"] = authScheme.signingName;
+class CredentialsProviderError extends ProviderError {
+    constructor(message, tryNextLink = true) {
+        super(message, tryNextLink);
+        this.tryNextLink = tryNextLink;
+        this.name = "CredentialsProviderError";
+        Object.setPrototypeOf(this, CredentialsProviderError.prototype);
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/fromEnv.js
+
+const fromEnv = (envVarSelector) => async () => {
+    try {
+        const config = envVarSelector(process.env);
+        if (config === undefined) {
+            throw new Error();
         }
-        return next({
-            ...args,
-        });
+        return config;
+    }
+    catch (e) {
+        throw new CredentialsProviderError(e.message || `Cannot load config from environment variables with getter: ${envVarSelector}`);
+    }
+};
+
+;// CONCATENATED MODULE: external "os"
+const external_os_namespaceObject = require("os");
+;// CONCATENATED MODULE: external "path"
+const external_path_namespaceObject = require("path");
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getHomeDir.js
+
+
+const homeDirCache = {};
+const getHomeDirCacheKey = () => {
+    if (process && process.geteuid) {
+        return `${process.geteuid()}`;
+    }
+    return "DEFAULT";
+};
+const getHomeDir = () => {
+    const { HOME, USERPROFILE, HOMEPATH, HOMEDRIVE = `C:${external_path_namespaceObject.sep}` } = process.env;
+    if (HOME)
+        return HOME;
+    if (USERPROFILE)
+        return USERPROFILE;
+    if (HOMEPATH)
+        return `${HOMEDRIVE}${HOMEPATH}`;
+    const homeDirCacheKey = getHomeDirCacheKey();
+    if (!homeDirCache[homeDirCacheKey])
+        homeDirCache[homeDirCacheKey] = (0,external_os_namespaceObject.homedir)();
+    return homeDirCache[homeDirCacheKey];
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileName.js
+const ENV_PROFILE = "AWS_PROFILE";
+const DEFAULT_PROFILE = "default";
+const getProfileName = (init) => init.profile || process.env[ENV_PROFILE] || DEFAULT_PROFILE;
+
+;// CONCATENATED MODULE: external "crypto"
+const external_crypto_namespaceObject = require("crypto");
+var external_crypto_default = /*#__PURE__*/__webpack_require__.n(external_crypto_namespaceObject);
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getSSOTokenFilepath.js
+
+
+
+const getSSOTokenFilepath = (id) => {
+    const hasher = (0,external_crypto_namespaceObject.createHash)("sha1");
+    const cacheName = hasher.update(id).digest("hex");
+    return (0,external_path_namespaceObject.join)(getHomeDir(), ".aws", "sso", "cache", `${cacheName}.json`);
+};
+
+;// CONCATENATED MODULE: external "fs"
+const external_fs_namespaceObject = require("fs");
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getSSOTokenFromFile.js
+
+
+const { readFile } = external_fs_namespaceObject.promises;
+const getSSOTokenFromFile = async (id) => {
+    const ssoTokenFilepath = getSSOTokenFilepath(id);
+    const ssoTokenText = await readFile(ssoTokenFilepath, "utf8");
+    return JSON.parse(ssoTokenText);
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getConfigData.js
+
+
+const getConfigData = (data) => Object.entries(data)
+    .filter(([key]) => {
+    const sections = key.split(CONFIG_PREFIX_SEPARATOR);
+    if (sections.length === 2 && Object.values(IniSectionType).includes(sections[0])) {
+        return true;
+    }
+    return false;
+})
+    .reduce((acc, [key, value]) => {
+    const updatedKey = key.startsWith(IniSectionType.PROFILE) ? key.split(CONFIG_PREFIX_SEPARATOR)[1] : key;
+    acc[updatedKey] = value;
+    return acc;
+}, {
+    ...(data.default && { default: data.default }),
+});
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getConfigFilepath.js
+
+
+const ENV_CONFIG_PATH = "AWS_CONFIG_FILE";
+const getConfigFilepath = () => process.env[ENV_CONFIG_PATH] || (0,external_path_namespaceObject.join)(getHomeDir(), ".aws", "config");
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getCredentialsFilepath.js
+
+
+const ENV_CREDENTIALS_PATH = "AWS_SHARED_CREDENTIALS_FILE";
+const getCredentialsFilepath = () => process.env[ENV_CREDENTIALS_PATH] || (0,external_path_namespaceObject.join)(getHomeDir(), ".aws", "credentials");
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/parseIni.js
+
+
+const prefixKeyRegex = /^([\w-]+)\s(["'])?([\w-]+)\2$/;
+const profileNameBlockList = ["__proto__", "profile __proto__"];
+const parseIni = (iniData) => {
+    const map = {};
+    let currentSection;
+    let currentSubSection;
+    for (let line of iniData.split(/\r?\n/)) {
+        line = line.split(/(^|\s)[;#]/)[0].trim();
+        const isSection = line[0] === "[" && line[line.length - 1] === "]";
+        if (isSection) {
+            currentSection = undefined;
+            currentSubSection = undefined;
+            const sectionName = line.substring(1, line.length - 1);
+            const matches = prefixKeyRegex.exec(sectionName);
+            if (matches) {
+                const [, prefix, , name] = matches;
+                if (Object.values(IniSectionType).includes(prefix)) {
+                    currentSection = [prefix, name].join(CONFIG_PREFIX_SEPARATOR);
+                }
+            }
+            else {
+                currentSection = sectionName;
+            }
+            if (profileNameBlockList.includes(sectionName)) {
+                throw new Error(`Found invalid profile name "${sectionName}"`);
+            }
+        }
+        else if (currentSection) {
+            const indexOfEqualsSign = line.indexOf("=");
+            if (![0, -1].includes(indexOfEqualsSign)) {
+                const [name, value] = [
+                    line.substring(0, indexOfEqualsSign).trim(),
+                    line.substring(indexOfEqualsSign + 1).trim(),
+                ];
+                if (value === "") {
+                    currentSubSection = name;
+                }
+                else {
+                    map[currentSection] = map[currentSection] || {};
+                    const key = currentSubSection ? [currentSubSection, name].join(CONFIG_PREFIX_SEPARATOR) : name;
+                    map[currentSection][key] = value;
+                }
+            }
+        }
+    }
+    return map;
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/slurpFile.js
+
+const { readFile: slurpFile_readFile } = external_fs_namespaceObject.promises;
+const filePromisesHash = {};
+const slurpFile = (path, options) => {
+    if (!filePromisesHash[path] || options?.ignoreCache) {
+        filePromisesHash[path] = slurpFile_readFile(path, "utf8");
+    }
+    return filePromisesHash[path];
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/loadSharedConfigFiles.js
+
+
+
+
+
+const swallowError = () => ({});
+const CONFIG_PREFIX_SEPARATOR = ".";
+const loadSharedConfigFiles = async (init = {}) => {
+    const { filepath = getCredentialsFilepath(), configFilepath = getConfigFilepath() } = init;
+    const parsedFiles = await Promise.all([
+        slurpFile(configFilepath, {
+            ignoreCache: init.ignoreCache,
+        })
+            .then(parseIni)
+            .then(getConfigData)
+            .catch(swallowError),
+        slurpFile(filepath, {
+            ignoreCache: init.ignoreCache,
+        })
+            .then(parseIni)
+            .catch(swallowError),
+    ]);
+    return {
+        configFile: parsedFiles[0],
+        credentialsFile: parsedFiles[1],
     };
 };
 
-;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/getEndpointPlugin.js
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getSsoSessionData.js
 
 
-const endpointMiddlewareOptions = {
-    step: "serialize",
-    tags: ["ENDPOINT_PARAMETERS", "ENDPOINT_V2", "ENDPOINT"],
-    name: "endpointV2Middleware",
-    override: true,
-    relation: "before",
-    toMiddleware: serializerMiddlewareOption.name,
+const getSsoSessionData = (data) => Object.entries(data)
+    .filter(([key]) => key.startsWith(IniSectionType.SSO_SESSION + CONFIG_PREFIX_SEPARATOR))
+    .reduce((acc, [key, value]) => ({ ...acc, [key.split(CONFIG_PREFIX_SEPARATOR)[1]]: value }), {});
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/loadSsoSessionData.js
+
+
+
+
+const loadSsoSessionData_swallowError = () => ({});
+const loadSsoSessionData = async (init = {}) => slurpFile(init.configFilepath ?? getConfigFilepath())
+    .then(parseIni)
+    .then(getSsoSessionData)
+    .catch(loadSsoSessionData_swallowError);
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/mergeConfigFiles.js
+const mergeConfigFiles = (...files) => {
+    const merged = {};
+    for (const file of files) {
+        for (const [key, values] of Object.entries(file)) {
+            if (merged[key] !== undefined) {
+                Object.assign(merged[key], values);
+            }
+            else {
+                merged[key] = values;
+            }
+        }
+    }
+    return merged;
 };
-const getEndpointPlugin = (config, instructions) => ({
-    applyToStack: (clientStack) => {
-        clientStack.addRelativeTo(endpointMiddleware({
-            config,
-            instructions,
-        }), endpointMiddlewareOptions);
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js
+
+
+const parseKnownFiles = async (init) => {
+    const parsedFiles = await loadSharedConfigFiles(init);
+    return mergeConfigFiles(parsedFiles.configFile, parsedFiles.credentialsFile);
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/index.js
+
+
+
+
+
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/fromSharedConfigFiles.js
+
+
+const fromSharedConfigFiles = (configSelector, { preferredFile = "config", ...init } = {}) => async () => {
+    const profile = getProfileName(init);
+    const { configFile, credentialsFile } = await loadSharedConfigFiles(init);
+    const profileFromCredentials = credentialsFile[profile] || {};
+    const profileFromConfig = configFile[profile] || {};
+    const mergedProfile = preferredFile === "config"
+        ? { ...profileFromCredentials, ...profileFromConfig }
+        : { ...profileFromConfig, ...profileFromCredentials };
+    try {
+        const cfgFile = preferredFile === "config" ? configFile : credentialsFile;
+        const configValue = configSelector(mergedProfile, cfgFile);
+        if (configValue === undefined) {
+            throw new Error();
+        }
+        return configValue;
+    }
+    catch (e) {
+        throw new CredentialsProviderError(e.message || `Cannot load config for profile ${profile} in SDK configuration files with getter: ${configSelector}`);
+    }
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/property-provider/dist-es/fromStatic.js
+const fromStatic = (staticValue) => () => Promise.resolve(staticValue);
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/fromStatic.js
+
+const isFunction = (func) => typeof func === "function";
+const fromStatic_fromStatic = (defaultValue) => isFunction(defaultValue) ? async () => await defaultValue() : fromStatic(defaultValue);
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/configLoader.js
+
+
+
+
+const loadConfig = ({ environmentVariableSelector, configFileSelector, default: defaultValue }, configuration = {}) => memoize(chain(fromEnv(environmentVariableSelector), fromSharedConfigFiles(configFileSelector, configuration), fromStatic_fromStatic(defaultValue)));
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/index.js
+
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/adaptors/getEndpointUrlConfig.js
+
+const ENV_ENDPOINT_URL = "AWS_ENDPOINT_URL";
+const CONFIG_ENDPOINT_URL = "endpoint_url";
+const getEndpointUrlConfig = (serviceId) => ({
+    environmentVariableSelector: (env) => {
+        const serviceSuffixParts = serviceId.split(" ").map((w) => w.toUpperCase());
+        const serviceEndpointUrl = env[[ENV_ENDPOINT_URL, ...serviceSuffixParts].join("_")];
+        if (serviceEndpointUrl)
+            return serviceEndpointUrl;
+        const endpointUrl = env[ENV_ENDPOINT_URL];
+        if (endpointUrl)
+            return endpointUrl;
+        return undefined;
     },
+    configFileSelector: (profile, config) => {
+        if (config && profile.services) {
+            const servicesSection = config[["services", profile.services].join(CONFIG_PREFIX_SEPARATOR)];
+            if (servicesSection) {
+                const servicePrefixParts = serviceId.split(" ").map((w) => w.toLowerCase());
+                const endpointUrl = servicesSection[[servicePrefixParts.join("_"), CONFIG_ENDPOINT_URL].join(CONFIG_PREFIX_SEPARATOR)];
+                if (endpointUrl)
+                    return endpointUrl;
+            }
+        }
+        const endpointUrl = profile[CONFIG_ENDPOINT_URL];
+        if (endpointUrl)
+            return endpointUrl;
+        return undefined;
+    },
+    default: undefined,
 });
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/adaptors/getEndpointFromConfig.js
+
+
+const getEndpointFromConfig = async (serviceId) => loadConfig(getEndpointUrlConfig(serviceId))();
 
 ;// CONCATENATED MODULE: ./node_modules/@smithy/querystring-parser/dist-es/index.js
 function parseQueryString(querystring) {
@@ -3821,6 +4078,165 @@ const toEndpointV1 = (endpoint) => {
     }
     return parseUrl(endpoint);
 };
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/adaptors/getEndpointFromInstructions.js
+
+
+
+
+const getEndpointFromInstructions = async (commandInput, instructionsSupplier, clientConfig, context) => {
+    if (!clientConfig.endpoint) {
+        const endpointFromConfig = await getEndpointFromConfig(clientConfig.serviceId || "");
+        if (endpointFromConfig) {
+            clientConfig.endpoint = () => Promise.resolve(toEndpointV1(endpointFromConfig));
+        }
+    }
+    const endpointParams = await resolveParams(commandInput, instructionsSupplier, clientConfig);
+    if (typeof clientConfig.endpointProvider !== "function") {
+        throw new Error("config.endpointProvider is not set.");
+    }
+    const endpoint = clientConfig.endpointProvider(endpointParams, context);
+    return endpoint;
+};
+const resolveParams = async (commandInput, instructionsSupplier, clientConfig) => {
+    const endpointParams = {};
+    const instructions = instructionsSupplier?.getEndpointParameterInstructions?.() || {};
+    for (const [name, instruction] of Object.entries(instructions)) {
+        switch (instruction.type) {
+            case "staticContextParams":
+                endpointParams[name] = instruction.value;
+                break;
+            case "contextParams":
+                endpointParams[name] = commandInput[instruction.name];
+                break;
+            case "clientContextParams":
+            case "builtInParams":
+                endpointParams[name] = await createConfigValueProvider(instruction.name, name, clientConfig)();
+                break;
+            default:
+                throw new Error("Unrecognized endpoint parameter instruction: " + JSON.stringify(instruction));
+        }
+    }
+    if (Object.keys(instructions).length === 0) {
+        Object.assign(endpointParams, clientConfig);
+    }
+    if (String(clientConfig.serviceId).toLowerCase() === "s3") {
+        await resolveParamsForS3(endpointParams);
+    }
+    return endpointParams;
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/adaptors/index.js
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/endpointMiddleware.js
+
+const endpointMiddleware = ({ config, instructions, }) => {
+    return (next, context) => async (args) => {
+        const endpoint = await getEndpointFromInstructions(args.input, {
+            getEndpointParameterInstructions() {
+                return instructions;
+            },
+        }, { ...config }, context);
+        context.endpointV2 = endpoint;
+        context.authSchemes = endpoint.properties?.authSchemes;
+        const authScheme = context.authSchemes?.[0];
+        if (authScheme) {
+            context["signing_region"] = authScheme.signingRegion;
+            context["signing_service"] = authScheme.signingName;
+        }
+        return next({
+            ...args,
+        });
+    };
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-serde/dist-es/deserializerMiddleware.js
+const deserializerMiddleware = (options, deserializer) => (next, context) => async (args) => {
+    const { response } = await next(args);
+    try {
+        const parsed = await deserializer(response, options);
+        return {
+            response,
+            output: parsed,
+        };
+    }
+    catch (error) {
+        Object.defineProperty(error, "$response", {
+            value: response,
+        });
+        if (!("$metadata" in error)) {
+            const hint = `Deserialization error: to see the raw response, inspect the hidden field {error}.$response on this object.`;
+            error.message += "\n  " + hint;
+        }
+        throw error;
+    }
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-serde/dist-es/serializerMiddleware.js
+const serializerMiddleware = (options, serializer) => (next, context) => async (args) => {
+    const endpoint = context.endpointV2?.url && options.urlParser
+        ? async () => options.urlParser(context.endpointV2.url)
+        : options.endpoint;
+    if (!endpoint) {
+        throw new Error("No valid endpoint provider available.");
+    }
+    const request = await serializer(args.input, { ...options, endpoint });
+    return next({
+        ...args,
+        request,
+    });
+};
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-serde/dist-es/serdePlugin.js
+
+
+const deserializerMiddlewareOption = {
+    name: "deserializerMiddleware",
+    step: "deserialize",
+    tags: ["DESERIALIZER"],
+    override: true,
+};
+const serializerMiddlewareOption = {
+    name: "serializerMiddleware",
+    step: "serialize",
+    tags: ["SERIALIZER"],
+    override: true,
+};
+function getSerdePlugin(config, serializer, deserializer) {
+    return {
+        applyToStack: (commandStack) => {
+            commandStack.add(deserializerMiddleware(config, deserializer), deserializerMiddlewareOption);
+            commandStack.add(serializerMiddleware(config, serializer), serializerMiddlewareOption);
+        },
+    };
+}
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-serde/dist-es/index.js
+
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/getEndpointPlugin.js
+
+
+const endpointMiddlewareOptions = {
+    step: "serialize",
+    tags: ["ENDPOINT_PARAMETERS", "ENDPOINT_V2", "ENDPOINT"],
+    name: "endpointV2Middleware",
+    override: true,
+    relation: "before",
+    toMiddleware: serializerMiddlewareOption.name,
+};
+const getEndpointPlugin = (config, instructions) => ({
+    applyToStack: (clientStack) => {
+        clientStack.addRelativeTo(endpointMiddleware({
+            config,
+            instructions,
+        }), endpointMiddlewareOptions);
+    },
+});
 
 ;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-endpoint/dist-es/resolveEndpointConfig.js
 
@@ -4394,9 +4810,6 @@ const getOmitRetryHeadersPlugin = (options) => ({
     },
 });
 
-;// CONCATENATED MODULE: external "crypto"
-const external_crypto_namespaceObject = require("crypto");
-var external_crypto_default = /*#__PURE__*/__webpack_require__.n(external_crypto_namespaceObject);
 ;// CONCATENATED MODULE: ./node_modules/uuid/dist/esm-node/rng.js
 
 const rnds8Pool = new Uint8Array(256); // # of random values to pre-allocate
@@ -4611,18 +5024,37 @@ class NoOpLogger {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@smithy/middleware-stack/dist-es/MiddlewareStack.js
+const getAllAliases = (name, aliases) => {
+    const _aliases = [];
+    if (name) {
+        _aliases.push(name);
+    }
+    if (aliases) {
+        for (const alias of aliases) {
+            _aliases.push(alias);
+        }
+    }
+    return _aliases;
+};
+const getMiddlewareNameWithAliases = (name, aliases) => {
+    return `${name || "anonymous"}${aliases && aliases.length > 0 ? ` (a.k.a. ${aliases.join(",")})` : ""}`;
+};
 const constructStack = () => {
     let absoluteEntries = [];
     let relativeEntries = [];
+    let identifyOnResolve = false;
     const entriesNameSet = new Set();
     const sort = (entries) => entries.sort((a, b) => stepWeights[b.step] - stepWeights[a.step] ||
         priorityWeights[b.priority || "normal"] - priorityWeights[a.priority || "normal"]);
     const removeByName = (toRemove) => {
         let isRemoved = false;
         const filterCb = (entry) => {
-            if (entry.name && entry.name === toRemove) {
+            const aliases = getAllAliases(entry.name, entry.aliases);
+            if (aliases.includes(toRemove)) {
                 isRemoved = true;
-                entriesNameSet.delete(toRemove);
+                for (const alias of aliases) {
+                    entriesNameSet.delete(alias);
+                }
                 return false;
             }
             return true;
@@ -4636,8 +5068,9 @@ const constructStack = () => {
         const filterCb = (entry) => {
             if (entry.middleware === toRemove) {
                 isRemoved = true;
-                if (entry.name)
-                    entriesNameSet.delete(entry.name);
+                for (const alias of getAllAliases(entry.name, entry.aliases)) {
+                    entriesNameSet.delete(alias);
+                }
                 return false;
             }
             return true;
@@ -4653,6 +5086,7 @@ const constructStack = () => {
         relativeEntries.forEach((entry) => {
             toStack.addRelativeTo(entry.middleware, { ...entry });
         });
+        toStack.identifyOnResolve?.(stack.identifyOnResolve());
         return toStack;
     };
     const expandRelativeMiddlewareList = (from) => {
@@ -4686,8 +5120,9 @@ const constructStack = () => {
                 before: [],
                 after: [],
             };
-            if (normalizedEntry.name)
-                normalizedEntriesNameMap[normalizedEntry.name] = normalizedEntry;
+            for (const alias of getAllAliases(normalizedEntry.name, normalizedEntry.aliases)) {
+                normalizedEntriesNameMap[alias] = normalizedEntry;
+            }
             normalizedAbsoluteEntries.push(normalizedEntry);
         });
         relativeEntries.forEach((entry) => {
@@ -4696,8 +5131,9 @@ const constructStack = () => {
                 before: [],
                 after: [],
             };
-            if (normalizedEntry.name)
-                normalizedEntriesNameMap[normalizedEntry.name] = normalizedEntry;
+            for (const alias of getAllAliases(normalizedEntry.name, normalizedEntry.aliases)) {
+                normalizedEntriesNameMap[alias] = normalizedEntry;
+            }
             normalizedRelativeEntries.push(normalizedEntry);
         });
         normalizedRelativeEntries.forEach((entry) => {
@@ -4707,7 +5143,9 @@ const constructStack = () => {
                     if (debug) {
                         return;
                     }
-                    throw new Error(`${entry.toMiddleware} is not found when adding ${entry.name || "anonymous"} middleware ${entry.relation} ${entry.toMiddleware}`);
+                    throw new Error(`${entry.toMiddleware} is not found when adding ` +
+                        `${getMiddlewareNameWithAliases(entry.name, entry.aliases)} ` +
+                        `middleware ${entry.relation} ${entry.toMiddleware}`);
                 }
                 if (entry.relation === "after") {
                     toMiddleware.after.push(entry);
@@ -4727,48 +5165,68 @@ const constructStack = () => {
     };
     const stack = {
         add: (middleware, options = {}) => {
-            const { name, override } = options;
+            const { name, override, aliases: _aliases } = options;
             const entry = {
                 step: "initialize",
                 priority: "normal",
                 middleware,
                 ...options,
             };
-            if (name) {
-                if (entriesNameSet.has(name)) {
+            const aliases = getAllAliases(name, _aliases);
+            if (aliases.length > 0) {
+                if (aliases.some((alias) => entriesNameSet.has(alias))) {
                     if (!override)
-                        throw new Error(`Duplicate middleware name '${name}'`);
-                    const toOverrideIndex = absoluteEntries.findIndex((entry) => entry.name === name);
-                    const toOverride = absoluteEntries[toOverrideIndex];
-                    if (toOverride.step !== entry.step || toOverride.priority !== entry.priority) {
-                        throw new Error(`"${name}" middleware with ${toOverride.priority} priority in ${toOverride.step} step cannot be ` +
-                            `overridden by same-name middleware with ${entry.priority} priority in ${entry.step} step.`);
+                        throw new Error(`Duplicate middleware name '${getMiddlewareNameWithAliases(name, _aliases)}'`);
+                    for (const alias of aliases) {
+                        const toOverrideIndex = absoluteEntries.findIndex((entry) => entry.name === alias || entry.aliases?.some((a) => a === alias));
+                        if (toOverrideIndex === -1) {
+                            continue;
+                        }
+                        const toOverride = absoluteEntries[toOverrideIndex];
+                        if (toOverride.step !== entry.step || entry.priority !== toOverride.priority) {
+                            throw new Error(`"${getMiddlewareNameWithAliases(toOverride.name, toOverride.aliases)}" middleware with ` +
+                                `${toOverride.priority} priority in ${toOverride.step} step cannot ` +
+                                `be overridden by "${getMiddlewareNameWithAliases(name, _aliases)}" middleware with ` +
+                                `${entry.priority} priority in ${entry.step} step.`);
+                        }
+                        absoluteEntries.splice(toOverrideIndex, 1);
                     }
-                    absoluteEntries.splice(toOverrideIndex, 1);
                 }
-                entriesNameSet.add(name);
+                for (const alias of aliases) {
+                    entriesNameSet.add(alias);
+                }
             }
             absoluteEntries.push(entry);
         },
         addRelativeTo: (middleware, options) => {
-            const { name, override } = options;
+            const { name, override, aliases: _aliases } = options;
             const entry = {
                 middleware,
                 ...options,
             };
-            if (name) {
-                if (entriesNameSet.has(name)) {
+            const aliases = getAllAliases(name, _aliases);
+            if (aliases.length > 0) {
+                if (aliases.some((alias) => entriesNameSet.has(alias))) {
                     if (!override)
-                        throw new Error(`Duplicate middleware name '${name}'`);
-                    const toOverrideIndex = relativeEntries.findIndex((entry) => entry.name === name);
-                    const toOverride = relativeEntries[toOverrideIndex];
-                    if (toOverride.toMiddleware !== entry.toMiddleware || toOverride.relation !== entry.relation) {
-                        throw new Error(`"${name}" middleware ${toOverride.relation} "${toOverride.toMiddleware}" middleware cannot be overridden ` +
-                            `by same-name middleware ${entry.relation} "${entry.toMiddleware}" middleware.`);
+                        throw new Error(`Duplicate middleware name '${getMiddlewareNameWithAliases(name, _aliases)}'`);
+                    for (const alias of aliases) {
+                        const toOverrideIndex = relativeEntries.findIndex((entry) => entry.name === alias || entry.aliases?.some((a) => a === alias));
+                        if (toOverrideIndex === -1) {
+                            continue;
+                        }
+                        const toOverride = relativeEntries[toOverrideIndex];
+                        if (toOverride.toMiddleware !== entry.toMiddleware || toOverride.relation !== entry.relation) {
+                            throw new Error(`"${getMiddlewareNameWithAliases(toOverride.name, toOverride.aliases)}" middleware ` +
+                                `${toOverride.relation} "${toOverride.toMiddleware}" middleware cannot be overridden ` +
+                                `by "${getMiddlewareNameWithAliases(name, _aliases)}" middleware ${entry.relation} ` +
+                                `"${entry.toMiddleware}" middleware.`);
+                        }
+                        relativeEntries.splice(toOverrideIndex, 1);
                     }
-                    relativeEntries.splice(toOverrideIndex, 1);
                 }
-                entriesNameSet.add(name);
+                for (const alias of aliases) {
+                    entriesNameSet.add(alias);
+                }
             }
             relativeEntries.push(entry);
         },
@@ -4785,10 +5243,12 @@ const constructStack = () => {
         removeByTag: (toRemove) => {
             let isRemoved = false;
             const filterCb = (entry) => {
-                const { tags, name } = entry;
+                const { tags, name, aliases: _aliases } = entry;
                 if (tags && tags.includes(toRemove)) {
-                    if (name)
-                        entriesNameSet.delete(name);
+                    const aliases = getAllAliases(name, _aliases);
+                    for (const alias of aliases) {
+                        entriesNameSet.delete(alias);
+                    }
                     isRemoved = true;
                     return false;
                 }
@@ -4801,19 +5261,32 @@ const constructStack = () => {
         concat: (from) => {
             const cloned = cloneTo(constructStack());
             cloned.use(from);
+            cloned.identifyOnResolve(identifyOnResolve || cloned.identifyOnResolve() || (from.identifyOnResolve?.() ?? false));
             return cloned;
         },
         applyToStack: cloneTo,
         identify: () => {
             return getMiddlewareList(true).map((mw) => {
-                return mw.name + ": " + (mw.tags || []).join(",");
+                const step = mw.step ??
+                    mw.relation +
+                        " " +
+                        mw.toMiddleware;
+                return getMiddlewareNameWithAliases(mw.name, mw.aliases) + " - " + step;
             });
+        },
+        identifyOnResolve(toggle) {
+            if (typeof toggle === "boolean")
+                identifyOnResolve = toggle;
+            return identifyOnResolve;
         },
         resolve: (handler, context) => {
             for (const middleware of getMiddlewareList()
                 .map((entry) => entry.middleware)
                 .reverse()) {
                 handler = middleware(handler, context);
+            }
+            if (identifyOnResolve) {
+                console.log(stack.identify());
             }
             return handler;
         },
@@ -6416,7 +6889,7 @@ const resolveClientEndpointParameters = (options) => {
 };
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/package.json
-const package_namespaceObject = {"i8":"3.413.0"};
+const package_namespaceObject = {"i8":"3.428.0"};
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sts/dist-es/models/STSServiceException.js
 
 
@@ -7580,6 +8053,7 @@ const loadQueryErrorCode = (output, data) => {
 
 
 
+
 class AssumeRoleCommand extends Command {
     static getEndpointParameterInstructions() {
         return {
@@ -7608,6 +8082,10 @@ class AssumeRoleCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: AssumeRoleResponseFilterSensitiveLog,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "AWSSecurityTokenServiceV20110615",
+                operation: "AssumeRole",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -7621,6 +8099,7 @@ class AssumeRoleCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sts/dist-es/commands/AssumeRoleWithWebIdentityCommand.js
+
 
 
 
@@ -7654,6 +8133,10 @@ class AssumeRoleWithWebIdentityCommand extends Command {
             commandName,
             inputFilterSensitiveLog: AssumeRoleWithWebIdentityRequestFilterSensitiveLog,
             outputFilterSensitiveLog: AssumeRoleWithWebIdentityResponseFilterSensitiveLog,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "AWSSecurityTokenServiceV20110615",
+                operation: "AssumeRoleWithWebIdentity",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -7757,38 +8240,14 @@ const EndpointParameters_resolveClientEndpointParameters = (options) => {
 };
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sts/package.json
-const client_sts_package_namespaceObject = {"i8":"3.413.0"};
-;// CONCATENATED MODULE: ./node_modules/@smithy/property-provider/dist-es/ProviderError.js
-class ProviderError extends Error {
-    constructor(message, tryNextLink = true) {
-        super(message);
-        this.tryNextLink = tryNextLink;
-        this.name = "ProviderError";
-        Object.setPrototypeOf(this, ProviderError.prototype);
-    }
-    static from(error, tryNextLink = true) {
-        return Object.assign(new this(error.message, tryNextLink), error);
-    }
-}
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
-
-class CredentialsProviderError extends ProviderError {
-    constructor(message, tryNextLink = true) {
-        super(message, tryNextLink);
-        this.tryNextLink = tryNextLink;
-        this.name = "CredentialsProviderError";
-        Object.setPrototypeOf(this, CredentialsProviderError.prototype);
-    }
-}
-
+const client_sts_package_namespaceObject = {"i8":"3.428.0"};
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/credential-provider-env/dist-es/fromEnv.js
 
 const ENV_KEY = "AWS_ACCESS_KEY_ID";
 const ENV_SECRET = "AWS_SECRET_ACCESS_KEY";
 const ENV_SESSION = "AWS_SESSION_TOKEN";
 const ENV_EXPIRATION = "AWS_CREDENTIAL_EXPIRATION";
-const fromEnv = () => async () => {
+const fromEnv_fromEnv = () => async () => {
     const accessKeyId = process.env[ENV_KEY];
     const secretAccessKey = process.env[ENV_SECRET];
     const sessionToken = process.env[ENV_SESSION];
@@ -7803,203 +8262,6 @@ const fromEnv = () => async () => {
     }
     throw new CredentialsProviderError("Unable to find environment variable credentials.");
 };
-
-;// CONCATENATED MODULE: external "os"
-const external_os_namespaceObject = require("os");
-;// CONCATENATED MODULE: external "path"
-const external_path_namespaceObject = require("path");
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getHomeDir.js
-
-
-const homeDirCache = {};
-const getHomeDirCacheKey = () => {
-    if (process && process.geteuid) {
-        return `${process.geteuid()}`;
-    }
-    return "DEFAULT";
-};
-const getHomeDir = () => {
-    const { HOME, USERPROFILE, HOMEPATH, HOMEDRIVE = `C:${external_path_namespaceObject.sep}` } = process.env;
-    if (HOME)
-        return HOME;
-    if (USERPROFILE)
-        return USERPROFILE;
-    if (HOMEPATH)
-        return `${HOMEDRIVE}${HOMEPATH}`;
-    const homeDirCacheKey = getHomeDirCacheKey();
-    if (!homeDirCache[homeDirCacheKey])
-        homeDirCache[homeDirCacheKey] = (0,external_os_namespaceObject.homedir)();
-    return homeDirCache[homeDirCacheKey];
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileName.js
-const ENV_PROFILE = "AWS_PROFILE";
-const DEFAULT_PROFILE = "default";
-const getProfileName = (init) => init.profile || process.env[ENV_PROFILE] || DEFAULT_PROFILE;
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getSSOTokenFilepath.js
-
-
-
-const getSSOTokenFilepath = (id) => {
-    const hasher = (0,external_crypto_namespaceObject.createHash)("sha1");
-    const cacheName = hasher.update(id).digest("hex");
-    return (0,external_path_namespaceObject.join)(getHomeDir(), ".aws", "sso", "cache", `${cacheName}.json`);
-};
-
-;// CONCATENATED MODULE: external "fs"
-const external_fs_namespaceObject = require("fs");
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getSSOTokenFromFile.js
-
-
-const { readFile } = external_fs_namespaceObject.promises;
-const getSSOTokenFromFile = async (id) => {
-    const ssoTokenFilepath = getSSOTokenFilepath(id);
-    const ssoTokenText = await readFile(ssoTokenFilepath, "utf8");
-    return JSON.parse(ssoTokenText);
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getConfigFilepath.js
-
-
-const ENV_CONFIG_PATH = "AWS_CONFIG_FILE";
-const getConfigFilepath = () => process.env[ENV_CONFIG_PATH] || (0,external_path_namespaceObject.join)(getHomeDir(), ".aws", "config");
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getCredentialsFilepath.js
-
-
-const ENV_CREDENTIALS_PATH = "AWS_SHARED_CREDENTIALS_FILE";
-const getCredentialsFilepath = () => process.env[ENV_CREDENTIALS_PATH] || (0,external_path_namespaceObject.join)(getHomeDir(), ".aws", "credentials");
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileData.js
-const profileKeyRegex = /^profile\s(["'])?([^\1]+)\1$/;
-const getProfileData = (data) => Object.entries(data)
-    .filter(([key]) => profileKeyRegex.test(key))
-    .reduce((acc, [key, value]) => ({ ...acc, [profileKeyRegex.exec(key)[2]]: value }), {
-    ...(data.default && { default: data.default }),
-});
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/parseIni.js
-const profileNameBlockList = ["__proto__", "profile __proto__"];
-const parseIni = (iniData) => {
-    const map = {};
-    let currentSection;
-    for (let line of iniData.split(/\r?\n/)) {
-        line = line.split(/(^|\s)[;#]/)[0].trim();
-        const isSection = line[0] === "[" && line[line.length - 1] === "]";
-        if (isSection) {
-            currentSection = line.substring(1, line.length - 1);
-            if (profileNameBlockList.includes(currentSection)) {
-                throw new Error(`Found invalid profile name "${currentSection}"`);
-            }
-        }
-        else if (currentSection) {
-            const indexOfEqualsSign = line.indexOf("=");
-            const start = 0;
-            const end = line.length - 1;
-            const isAssignment = indexOfEqualsSign !== -1 && indexOfEqualsSign !== start && indexOfEqualsSign !== end;
-            if (isAssignment) {
-                const [name, value] = [
-                    line.substring(0, indexOfEqualsSign).trim(),
-                    line.substring(indexOfEqualsSign + 1).trim(),
-                ];
-                map[currentSection] = map[currentSection] || {};
-                map[currentSection][name] = value;
-            }
-        }
-    }
-    return map;
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/slurpFile.js
-
-const { readFile: slurpFile_readFile } = external_fs_namespaceObject.promises;
-const filePromisesHash = {};
-const slurpFile = (path, options) => {
-    if (!filePromisesHash[path] || options?.ignoreCache) {
-        filePromisesHash[path] = slurpFile_readFile(path, "utf8");
-    }
-    return filePromisesHash[path];
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/loadSharedConfigFiles.js
-
-
-
-
-
-const swallowError = () => ({});
-const loadSharedConfigFiles = async (init = {}) => {
-    const { filepath = getCredentialsFilepath(), configFilepath = getConfigFilepath() } = init;
-    const parsedFiles = await Promise.all([
-        slurpFile(configFilepath, {
-            ignoreCache: init.ignoreCache,
-        })
-            .then(parseIni)
-            .then(getProfileData)
-            .catch(swallowError),
-        slurpFile(filepath, {
-            ignoreCache: init.ignoreCache,
-        })
-            .then(parseIni)
-            .catch(swallowError),
-    ]);
-    return {
-        configFile: parsedFiles[0],
-        credentialsFile: parsedFiles[1],
-    };
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/getSsoSessionData.js
-const ssoSessionKeyRegex = /^sso-session\s(["'])?([^\1]+)\1$/;
-const getSsoSessionData = (data) => Object.entries(data)
-    .filter(([key]) => ssoSessionKeyRegex.test(key))
-    .reduce((acc, [key, value]) => ({ ...acc, [ssoSessionKeyRegex.exec(key)[2]]: value }), {});
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/loadSsoSessionData.js
-
-
-
-
-const loadSsoSessionData_swallowError = () => ({});
-const loadSsoSessionData = async (init = {}) => slurpFile(init.configFilepath ?? getConfigFilepath())
-    .then(parseIni)
-    .then(getSsoSessionData)
-    .catch(loadSsoSessionData_swallowError);
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/mergeConfigFiles.js
-const mergeConfigFiles = (...files) => {
-    const merged = {};
-    for (const file of files) {
-        for (const [key, values] of Object.entries(file)) {
-            if (merged[key] !== undefined) {
-                Object.assign(merged[key], values);
-            }
-            else {
-                merged[key] = values;
-            }
-        }
-    }
-    return merged;
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js
-
-
-const parseKnownFiles = async (init) => {
-    const parsedFiles = await loadSharedConfigFiles(init);
-    return mergeConfigFiles(parsedFiles.configFile, parsedFiles.credentialsFile);
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/shared-ini-file-loader/dist-es/index.js
-
-
-
-
-
-
-
-
 
 ;// CONCATENATED MODULE: external "url"
 const external_url_namespaceObject = require("url");
@@ -8136,85 +8398,6 @@ const getCmdsUri = async () => {
         ` the ${ENV_CMDS_RELATIVE_URI} or ${ENV_CMDS_FULL_URI} environment` +
         " variable is set", false);
 };
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/property-provider/dist-es/chain.js
-
-const chain = (...providers) => async () => {
-    if (providers.length === 0) {
-        throw new ProviderError("No providers in chain");
-    }
-    let lastProviderError;
-    for (const provider of providers) {
-        try {
-            const credentials = await provider();
-            return credentials;
-        }
-        catch (err) {
-            lastProviderError = err;
-            if (err?.tryNextLink) {
-                continue;
-            }
-            throw err;
-        }
-    }
-    throw lastProviderError;
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/fromEnv.js
-
-const fromEnv_fromEnv = (envVarSelector) => async () => {
-    try {
-        const config = envVarSelector(process.env);
-        if (config === undefined) {
-            throw new Error();
-        }
-        return config;
-    }
-    catch (e) {
-        throw new CredentialsProviderError(e.message || `Cannot load config from environment variables with getter: ${envVarSelector}`);
-    }
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/fromSharedConfigFiles.js
-
-
-const fromSharedConfigFiles = (configSelector, { preferredFile = "config", ...init } = {}) => async () => {
-    const profile = getProfileName(init);
-    const { configFile, credentialsFile } = await loadSharedConfigFiles(init);
-    const profileFromCredentials = credentialsFile[profile] || {};
-    const profileFromConfig = configFile[profile] || {};
-    const mergedProfile = preferredFile === "config"
-        ? { ...profileFromCredentials, ...profileFromConfig }
-        : { ...profileFromConfig, ...profileFromCredentials };
-    try {
-        const configValue = configSelector(mergedProfile);
-        if (configValue === undefined) {
-            throw new Error();
-        }
-        return configValue;
-    }
-    catch (e) {
-        throw new CredentialsProviderError(e.message || `Cannot load config for profile ${profile} in SDK configuration files with getter: ${configSelector}`);
-    }
-};
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/property-provider/dist-es/fromStatic.js
-const fromStatic = (staticValue) => () => Promise.resolve(staticValue);
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/fromStatic.js
-
-const isFunction = (func) => typeof func === "function";
-const fromStatic_fromStatic = (defaultValue) => isFunction(defaultValue) ? async () => await defaultValue() : fromStatic(defaultValue);
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/configLoader.js
-
-
-
-
-const loadConfig = ({ environmentVariableSelector, configFileSelector, default: defaultValue }, configuration = {}) => memoize(chain(fromEnv_fromEnv(environmentVariableSelector), fromSharedConfigFiles(configFileSelector, configuration), fromStatic_fromStatic(defaultValue)));
-
-;// CONCATENATED MODULE: ./node_modules/@smithy/node-config-provider/dist-es/index.js
-
 
 ;// CONCATENATED MODULE: ./node_modules/@smithy/credential-provider-imds/dist-es/config/Endpoint.js
 var Endpoint;
@@ -8425,7 +8608,7 @@ const resolveCredentialSource = (credentialSource, profileName) => {
     const sourceProvidersMap = {
         EcsContainer: fromContainerMetadata,
         Ec2InstanceMetadata: fromInstanceMetadata,
-        Environment: fromEnv,
+        Environment: fromEnv_fromEnv,
     };
     if (credentialSource in sourceProvidersMap) {
         return sourceProvidersMap[credentialSource]();
@@ -8583,7 +8766,7 @@ const endpoint_EndpointParameters_resolveClientEndpointParameters = (options) =>
 };
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sso/package.json
-const client_sso_package_namespaceObject = {"i8":"3.413.0"};
+const client_sso_package_namespaceObject = {"i8":"3.428.0"};
 ;// CONCATENATED MODULE: external "process"
 const external_process_namespaceObject = require("process");
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/util-user-agent-node/dist-es/is-crt-available.js
@@ -8706,9 +8889,9 @@ const calculateBodyLength = (body) => {
 
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sso/dist-es/endpoint/ruleset.js
-const q = "required", r = "fn", s = "argv", t = "ref";
-const a = "isSet", b = "tree", c = "error", d = "endpoint", e = "PartitionResult", f = { [q]: false, "type": "String" }, g = { [q]: true, "default": false, "type": "Boolean" }, h = { [t]: "Endpoint" }, i = { [r]: "booleanEquals", [s]: [{ [t]: "UseFIPS" }, true] }, j = { [r]: "booleanEquals", [s]: [{ [t]: "UseDualStack" }, true] }, k = {}, l = { [r]: "booleanEquals", [s]: [true, { [r]: "getAttr", [s]: [{ [t]: e }, "supportsFIPS"] }] }, m = { [r]: "booleanEquals", [s]: [true, { [r]: "getAttr", [s]: [{ [t]: e }, "supportsDualStack"] }] }, n = [i], o = [j], p = [{ [t]: "Region" }];
-const _data = { version: "1.0", parameters: { Region: f, UseDualStack: g, UseFIPS: g, Endpoint: f }, rules: [{ conditions: [{ [r]: a, [s]: [h] }], type: b, rules: [{ conditions: n, error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: c }, { conditions: o, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", type: c }, { endpoint: { url: h, properties: k, headers: k }, type: d }] }, { conditions: [{ [r]: a, [s]: p }], type: b, rules: [{ conditions: [{ [r]: "aws.partition", [s]: p, assign: e }], type: b, rules: [{ conditions: [i, j], type: b, rules: [{ conditions: [l, m], type: b, rules: [{ endpoint: { url: "https://portal.sso-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: k, headers: k }, type: d }] }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", type: c }] }, { conditions: n, type: b, rules: [{ conditions: [l], type: b, rules: [{ endpoint: { url: "https://portal.sso-fips.{Region}.{PartitionResult#dnsSuffix}", properties: k, headers: k }, type: d }] }, { error: "FIPS is enabled but this partition does not support FIPS", type: c }] }, { conditions: o, type: b, rules: [{ conditions: [m], type: b, rules: [{ endpoint: { url: "https://portal.sso.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: k, headers: k }, type: d }] }, { error: "DualStack is enabled but this partition does not support DualStack", type: c }] }, { endpoint: { url: "https://portal.sso.{Region}.{PartitionResult#dnsSuffix}", properties: k, headers: k }, type: d }] }] }, { error: "Invalid Configuration: Missing Region", type: c }] };
+const s = "required", t = "fn", u = "argv", v = "ref";
+const a = "isSet", b = "tree", c = "error", d = "endpoint", e = "PartitionResult", f = "getAttr", g = { [s]: false, "type": "String" }, h = { [s]: true, "default": false, "type": "Boolean" }, i = { [v]: "Endpoint" }, j = { [t]: "booleanEquals", [u]: [{ [v]: "UseFIPS" }, true] }, k = { [t]: "booleanEquals", [u]: [{ [v]: "UseDualStack" }, true] }, l = {}, m = { [t]: "booleanEquals", [u]: [true, { [t]: f, [u]: [{ [v]: e }, "supportsFIPS"] }] }, n = { [v]: e }, o = { [t]: "booleanEquals", [u]: [true, { [t]: f, [u]: [n, "supportsDualStack"] }] }, p = [j], q = [k], r = [{ [v]: "Region" }];
+const _data = { version: "1.0", parameters: { Region: g, UseDualStack: h, UseFIPS: h, Endpoint: g }, rules: [{ conditions: [{ [t]: a, [u]: [i] }], type: b, rules: [{ conditions: p, error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: c }, { conditions: q, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", type: c }, { endpoint: { url: i, properties: l, headers: l }, type: d }] }, { conditions: [{ [t]: a, [u]: r }], type: b, rules: [{ conditions: [{ [t]: "aws.partition", [u]: r, assign: e }], type: b, rules: [{ conditions: [j, k], type: b, rules: [{ conditions: [m, o], type: b, rules: [{ endpoint: { url: "https://portal.sso-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: l, headers: l }, type: d }] }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", type: c }] }, { conditions: p, type: b, rules: [{ conditions: [m], type: b, rules: [{ conditions: [{ [t]: "stringEquals", [u]: ["aws-us-gov", { [t]: f, [u]: [n, "name"] }] }], endpoint: { url: "https://portal.sso.{Region}.amazonaws.com", properties: l, headers: l }, type: d }, { endpoint: { url: "https://portal.sso-fips.{Region}.{PartitionResult#dnsSuffix}", properties: l, headers: l }, type: d }] }, { error: "FIPS is enabled but this partition does not support FIPS", type: c }] }, { conditions: q, type: b, rules: [{ conditions: [o], type: b, rules: [{ endpoint: { url: "https://portal.sso.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: l, headers: l }, type: d }] }, { error: "DualStack is enabled but this partition does not support DualStack", type: c }] }, { endpoint: { url: "https://portal.sso.{Region}.{PartitionResult#dnsSuffix}", properties: l, headers: l }, type: d }] }] }, { error: "Invalid Configuration: Missing Region", type: c }] };
 const ruleSet = _data;
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sso/dist-es/endpoint/endpointResolver.js
@@ -8861,18 +9044,70 @@ const runtimeConfig_getRuntimeConfig = (config) => {
     };
 };
 
+;// CONCATENATED MODULE: ./node_modules/@aws-sdk/region-config-resolver/dist-es/extensions/index.js
+const getAwsRegionExtensionConfiguration = (runtimeConfig) => {
+    let runtimeConfigRegion = async () => {
+        if (runtimeConfig.region === undefined) {
+            throw new Error("Region is missing from runtimeConfig");
+        }
+        const region = runtimeConfig.region;
+        if (typeof region === "string") {
+            return region;
+        }
+        return region();
+    };
+    return {
+        setRegion(region) {
+            runtimeConfigRegion = region;
+        },
+        region() {
+            return runtimeConfigRegion;
+        },
+    };
+};
+const resolveAwsRegionExtensionConfiguration = (awsRegionExtensionConfiguration) => {
+    return {
+        region: awsRegionExtensionConfiguration.region(),
+    };
+};
+
+;// CONCATENATED MODULE: ./node_modules/@aws-sdk/region-config-resolver/dist-es/regionConfig/config.js
+const config_REGION_ENV_NAME = "AWS_REGION";
+const config_REGION_INI_NAME = "region";
+const config_NODE_REGION_CONFIG_OPTIONS = {
+    environmentVariableSelector: (env) => env[config_REGION_ENV_NAME],
+    configFileSelector: (profile) => profile[config_REGION_INI_NAME],
+    default: () => {
+        throw new Error("Region is missing");
+    },
+};
+const config_NODE_REGION_CONFIG_FILE_OPTIONS = {
+    preferredFile: "credentials",
+};
+
+;// CONCATENATED MODULE: ./node_modules/@aws-sdk/region-config-resolver/dist-es/regionConfig/index.js
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@aws-sdk/region-config-resolver/dist-es/index.js
+
+
+
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sso/dist-es/runtimeExtensions.js
+
 
 
 const asPartial = (t) => t;
 const resolveRuntimeExtensions = (runtimeConfig, extensions) => {
     const extensionConfiguration = {
+        ...asPartial(getAwsRegionExtensionConfiguration(runtimeConfig)),
         ...asPartial(getDefaultExtensionConfiguration(runtimeConfig)),
         ...asPartial(getHttpHandlerExtensionConfiguration(runtimeConfig)),
     };
     extensions.forEach((extension) => extension.configure(extensionConfiguration));
     return {
         ...runtimeConfig,
+        ...resolveAwsRegionExtensionConfiguration(extensionConfiguration),
         ...defaultExtensionConfiguration_resolveDefaultRuntimeConfig(extensionConfiguration),
         ...resolveHttpHandlerRuntimeConfig(extensionConfiguration),
     };
@@ -9368,6 +9603,7 @@ const loadRestJsonErrorCode = (output, data) => {
 
 
 
+
 class GetRoleCredentialsCommand extends Command {
     static getEndpointParameterInstructions() {
         return {
@@ -9394,6 +9630,10 @@ class GetRoleCredentialsCommand extends Command {
             commandName,
             inputFilterSensitiveLog: GetRoleCredentialsRequestFilterSensitiveLog,
             outputFilterSensitiveLog: GetRoleCredentialsResponseFilterSensitiveLog,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SWBPortalService",
+                operation: "GetRoleCredentials",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -10713,7 +10953,7 @@ const remoteProvider = (init) => {
 
 
 
-const defaultProvider = (init = {}) => memoize(chain(...(init.profile || process.env[ENV_PROFILE] ? [] : [fromEnv()]), fromSSO(init), fromIni(init), fromProcess(init), fromTokenFile(init), remoteProvider(init), async () => {
+const defaultProvider = (init = {}) => memoize(chain(...(init.profile || process.env[ENV_PROFILE] ? [] : [fromEnv_fromEnv()]), fromSSO(init), fromIni(init), fromProcess(init), fromTokenFile(init), remoteProvider(init), async () => {
     throw new CredentialsProviderError("Could not load credentials from any providers", false);
 }), (credentials) => credentials.expiration !== undefined && credentials.expiration.getTime() - Date.now() < 300000, (credentials) => credentials.expiration !== undefined);
 
@@ -10722,8 +10962,8 @@ const defaultProvider = (init = {}) => memoize(chain(...(init.profile || process
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sts/dist-es/endpoint/ruleset.js
 const F = "required", G = "type", H = "fn", I = "argv", J = "ref";
-const ruleset_a = false, ruleset_b = true, ruleset_c = "booleanEquals", ruleset_d = "tree", ruleset_e = "stringEquals", ruleset_f = "sigv4", ruleset_g = "sts", ruleset_h = "us-east-1", ruleset_i = "endpoint", ruleset_j = "https://sts.{Region}.{PartitionResult#dnsSuffix}", ruleset_k = "error", ruleset_l = "getAttr", ruleset_m = { [F]: false, [G]: "String" }, ruleset_n = { [F]: true, "default": false, [G]: "Boolean" }, ruleset_o = { [J]: "Endpoint" }, ruleset_p = { [H]: "isSet", [I]: [{ [J]: "Region" }] }, ruleset_q = { [J]: "Region" }, ruleset_r = { [H]: "aws.partition", [I]: [ruleset_q], "assign": "PartitionResult" }, ruleset_s = { [J]: "UseFIPS" }, ruleset_t = { [J]: "UseDualStack" }, u = { "url": "https://sts.amazonaws.com", "properties": { "authSchemes": [{ "name": ruleset_f, "signingName": ruleset_g, "signingRegion": ruleset_h }] }, "headers": {} }, v = {}, w = { "conditions": [{ [H]: ruleset_e, [I]: [ruleset_q, "aws-global"] }], [ruleset_i]: u, [G]: ruleset_i }, x = { [H]: ruleset_c, [I]: [ruleset_s, true] }, y = { [H]: ruleset_c, [I]: [ruleset_t, true] }, z = { [H]: ruleset_c, [I]: [true, { [H]: ruleset_l, [I]: [{ [J]: "PartitionResult" }, "supportsFIPS"] }] }, A = { [J]: "PartitionResult" }, B = { [H]: ruleset_c, [I]: [true, { [H]: ruleset_l, [I]: [A, "supportsDualStack"] }] }, C = [{ [H]: "isSet", [I]: [ruleset_o] }], D = [x], E = [y];
-const ruleset_data = { version: "1.0", parameters: { Region: ruleset_m, UseDualStack: ruleset_n, UseFIPS: ruleset_n, Endpoint: ruleset_m, UseGlobalEndpoint: ruleset_n }, rules: [{ conditions: [{ [H]: ruleset_c, [I]: [{ [J]: "UseGlobalEndpoint" }, ruleset_b] }, { [H]: "not", [I]: C }, ruleset_p, ruleset_r, { [H]: ruleset_c, [I]: [ruleset_s, ruleset_a] }, { [H]: ruleset_c, [I]: [ruleset_t, ruleset_a] }], [G]: ruleset_d, rules: [{ conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ap-northeast-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ap-south-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ap-southeast-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ap-southeast-2"] }], endpoint: u, [G]: ruleset_i }, w, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ca-central-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-central-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-north-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-west-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-west-2"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-west-3"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "sa-east-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, ruleset_h] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "us-east-2"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "us-west-1"] }], endpoint: u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "us-west-2"] }], endpoint: u, [G]: ruleset_i }, { endpoint: { url: ruleset_j, properties: { authSchemes: [{ name: ruleset_f, signingName: ruleset_g, signingRegion: "{Region}" }] }, headers: v }, [G]: ruleset_i }] }, { conditions: C, [G]: ruleset_d, rules: [{ conditions: D, error: "Invalid Configuration: FIPS and custom endpoint are not supported", [G]: ruleset_k }, { conditions: E, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", [G]: ruleset_k }, { endpoint: { url: ruleset_o, properties: v, headers: v }, [G]: ruleset_i }] }, { conditions: [ruleset_p], [G]: ruleset_d, rules: [{ conditions: [ruleset_r], [G]: ruleset_d, rules: [{ conditions: [x, y], [G]: ruleset_d, rules: [{ conditions: [z, B], [G]: ruleset_d, rules: [{ endpoint: { url: "https://sts-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: v, headers: v }, [G]: ruleset_i }] }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", [G]: ruleset_k }] }, { conditions: D, [G]: ruleset_d, rules: [{ conditions: [z], [G]: ruleset_d, rules: [{ conditions: [{ [H]: ruleset_e, [I]: ["aws-us-gov", { [H]: ruleset_l, [I]: [A, "name"] }] }], endpoint: { url: "https://sts.{Region}.amazonaws.com", properties: v, headers: v }, [G]: ruleset_i }, { endpoint: { url: "https://sts-fips.{Region}.{PartitionResult#dnsSuffix}", properties: v, headers: v }, [G]: ruleset_i }] }, { error: "FIPS is enabled but this partition does not support FIPS", [G]: ruleset_k }] }, { conditions: E, [G]: ruleset_d, rules: [{ conditions: [B], [G]: ruleset_d, rules: [{ endpoint: { url: "https://sts.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: v, headers: v }, [G]: ruleset_i }] }, { error: "DualStack is enabled but this partition does not support DualStack", [G]: ruleset_k }] }, w, { endpoint: { url: ruleset_j, properties: v, headers: v }, [G]: ruleset_i }] }] }, { error: "Invalid Configuration: Missing Region", [G]: ruleset_k }] };
+const ruleset_a = false, ruleset_b = true, ruleset_c = "booleanEquals", ruleset_d = "tree", ruleset_e = "stringEquals", ruleset_f = "sigv4", ruleset_g = "sts", ruleset_h = "us-east-1", ruleset_i = "endpoint", ruleset_j = "https://sts.{Region}.{PartitionResult#dnsSuffix}", ruleset_k = "error", ruleset_l = "getAttr", ruleset_m = { [F]: false, [G]: "String" }, ruleset_n = { [F]: true, "default": false, [G]: "Boolean" }, ruleset_o = { [J]: "Endpoint" }, ruleset_p = { [H]: "isSet", [I]: [{ [J]: "Region" }] }, ruleset_q = { [J]: "Region" }, ruleset_r = { [H]: "aws.partition", [I]: [ruleset_q], "assign": "PartitionResult" }, ruleset_s = { [J]: "UseFIPS" }, ruleset_t = { [J]: "UseDualStack" }, ruleset_u = { "url": "https://sts.amazonaws.com", "properties": { "authSchemes": [{ "name": ruleset_f, "signingName": ruleset_g, "signingRegion": ruleset_h }] }, "headers": {} }, ruleset_v = {}, w = { "conditions": [{ [H]: ruleset_e, [I]: [ruleset_q, "aws-global"] }], [ruleset_i]: ruleset_u, [G]: ruleset_i }, x = { [H]: ruleset_c, [I]: [ruleset_s, true] }, y = { [H]: ruleset_c, [I]: [ruleset_t, true] }, z = { [H]: ruleset_c, [I]: [true, { [H]: ruleset_l, [I]: [{ [J]: "PartitionResult" }, "supportsFIPS"] }] }, A = { [J]: "PartitionResult" }, B = { [H]: ruleset_c, [I]: [true, { [H]: ruleset_l, [I]: [A, "supportsDualStack"] }] }, C = [{ [H]: "isSet", [I]: [ruleset_o] }], D = [x], E = [y];
+const ruleset_data = { version: "1.0", parameters: { Region: ruleset_m, UseDualStack: ruleset_n, UseFIPS: ruleset_n, Endpoint: ruleset_m, UseGlobalEndpoint: ruleset_n }, rules: [{ conditions: [{ [H]: ruleset_c, [I]: [{ [J]: "UseGlobalEndpoint" }, ruleset_b] }, { [H]: "not", [I]: C }, ruleset_p, ruleset_r, { [H]: ruleset_c, [I]: [ruleset_s, ruleset_a] }, { [H]: ruleset_c, [I]: [ruleset_t, ruleset_a] }], [G]: ruleset_d, rules: [{ conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ap-northeast-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ap-south-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ap-southeast-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ap-southeast-2"] }], endpoint: ruleset_u, [G]: ruleset_i }, w, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "ca-central-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-central-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-north-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-west-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-west-2"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "eu-west-3"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "sa-east-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, ruleset_h] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "us-east-2"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "us-west-1"] }], endpoint: ruleset_u, [G]: ruleset_i }, { conditions: [{ [H]: ruleset_e, [I]: [ruleset_q, "us-west-2"] }], endpoint: ruleset_u, [G]: ruleset_i }, { endpoint: { url: ruleset_j, properties: { authSchemes: [{ name: ruleset_f, signingName: ruleset_g, signingRegion: "{Region}" }] }, headers: ruleset_v }, [G]: ruleset_i }] }, { conditions: C, [G]: ruleset_d, rules: [{ conditions: D, error: "Invalid Configuration: FIPS and custom endpoint are not supported", [G]: ruleset_k }, { conditions: E, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", [G]: ruleset_k }, { endpoint: { url: ruleset_o, properties: ruleset_v, headers: ruleset_v }, [G]: ruleset_i }] }, { conditions: [ruleset_p], [G]: ruleset_d, rules: [{ conditions: [ruleset_r], [G]: ruleset_d, rules: [{ conditions: [x, y], [G]: ruleset_d, rules: [{ conditions: [z, B], [G]: ruleset_d, rules: [{ endpoint: { url: "https://sts-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: ruleset_v, headers: ruleset_v }, [G]: ruleset_i }] }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", [G]: ruleset_k }] }, { conditions: D, [G]: ruleset_d, rules: [{ conditions: [z], [G]: ruleset_d, rules: [{ conditions: [{ [H]: ruleset_e, [I]: ["aws-us-gov", { [H]: ruleset_l, [I]: [A, "name"] }] }], endpoint: { url: "https://sts.{Region}.amazonaws.com", properties: ruleset_v, headers: ruleset_v }, [G]: ruleset_i }, { endpoint: { url: "https://sts-fips.{Region}.{PartitionResult#dnsSuffix}", properties: ruleset_v, headers: ruleset_v }, [G]: ruleset_i }] }, { error: "FIPS is enabled but this partition does not support FIPS", [G]: ruleset_k }] }, { conditions: E, [G]: ruleset_d, rules: [{ conditions: [B], [G]: ruleset_d, rules: [{ endpoint: { url: "https://sts.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: ruleset_v, headers: ruleset_v }, [G]: ruleset_i }] }, { error: "DualStack is enabled but this partition does not support DualStack", [G]: ruleset_k }] }, w, { endpoint: { url: ruleset_j, properties: ruleset_v, headers: ruleset_v }, [G]: ruleset_i }] }] }, { error: "Invalid Configuration: Missing Region", [G]: ruleset_k }] };
 const ruleset_ruleSet = ruleset_data;
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sts/dist-es/endpoint/endpointResolver.js
@@ -10804,15 +11044,18 @@ const dist_es_runtimeConfig_getRuntimeConfig = (config) => {
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-sts/dist-es/runtimeExtensions.js
 
 
+
 const runtimeExtensions_asPartial = (t) => t;
 const runtimeExtensions_resolveRuntimeExtensions = (runtimeConfig, extensions) => {
     const extensionConfiguration = {
+        ...runtimeExtensions_asPartial(getAwsRegionExtensionConfiguration(runtimeConfig)),
         ...runtimeExtensions_asPartial(getDefaultExtensionConfiguration(runtimeConfig)),
         ...runtimeExtensions_asPartial(getHttpHandlerExtensionConfiguration(runtimeConfig)),
     };
     extensions.forEach((extension) => extension.configure(extensionConfiguration));
     return {
         ...runtimeConfig,
+        ...resolveAwsRegionExtensionConfiguration(extensionConfiguration),
         ...defaultExtensionConfiguration_resolveDefaultRuntimeConfig(extensionConfiguration),
         ...resolveHttpHandlerRuntimeConfig(extensionConfiguration),
     };
@@ -10966,15 +11209,18 @@ const client_ses_dist_es_runtimeConfig_getRuntimeConfig = (config) => {
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/runtimeExtensions.js
 
 
+
 const dist_es_runtimeExtensions_asPartial = (t) => t;
 const dist_es_runtimeExtensions_resolveRuntimeExtensions = (runtimeConfig, extensions) => {
     const extensionConfiguration = {
+        ...dist_es_runtimeExtensions_asPartial(getAwsRegionExtensionConfiguration(runtimeConfig)),
         ...dist_es_runtimeExtensions_asPartial(getDefaultExtensionConfiguration(runtimeConfig)),
         ...dist_es_runtimeExtensions_asPartial(getHttpHandlerExtensionConfiguration(runtimeConfig)),
     };
     extensions.forEach((extension) => extension.configure(extensionConfiguration));
     return {
         ...runtimeConfig,
+        ...resolveAwsRegionExtensionConfiguration(extensionConfiguration),
         ...defaultExtensionConfiguration_resolveDefaultRuntimeConfig(extensionConfiguration),
         ...resolveHttpHandlerRuntimeConfig(extensionConfiguration),
     };
@@ -17887,6 +18133,7 @@ const Aws_query_loadQueryErrorCode = (output, data) => {
 
 
 
+
 class CloneReceiptRuleSetCommand extends Command {
     static getEndpointParameterInstructions() {
         return {
@@ -17913,6 +18160,10 @@ class CloneReceiptRuleSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CloneReceiptRuleSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -17926,6 +18177,7 @@ class CloneReceiptRuleSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/CreateConfigurationSetCommand.js
+
 
 
 
@@ -17957,6 +18209,10 @@ class CreateConfigurationSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CreateConfigurationSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -17970,6 +18226,7 @@ class CreateConfigurationSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/CreateConfigurationSetEventDestinationCommand.js
+
 
 
 
@@ -18001,6 +18258,10 @@ class CreateConfigurationSetEventDestinationCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CreateConfigurationSetEventDestination",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18014,6 +18275,7 @@ class CreateConfigurationSetEventDestinationCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/CreateConfigurationSetTrackingOptionsCommand.js
+
 
 
 
@@ -18045,6 +18307,10 @@ class CreateConfigurationSetTrackingOptionsCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CreateConfigurationSetTrackingOptions",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18058,6 +18324,7 @@ class CreateConfigurationSetTrackingOptionsCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/CreateCustomVerificationEmailTemplateCommand.js
+
 
 
 
@@ -18089,6 +18356,10 @@ class CreateCustomVerificationEmailTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CreateCustomVerificationEmailTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18102,6 +18373,7 @@ class CreateCustomVerificationEmailTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/CreateReceiptFilterCommand.js
+
 
 
 
@@ -18133,6 +18405,10 @@ class CreateReceiptFilterCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CreateReceiptFilter",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18146,6 +18422,7 @@ class CreateReceiptFilterCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/CreateReceiptRuleCommand.js
+
 
 
 
@@ -18177,6 +18454,10 @@ class CreateReceiptRuleCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CreateReceiptRule",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18190,6 +18471,7 @@ class CreateReceiptRuleCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/CreateReceiptRuleSetCommand.js
+
 
 
 
@@ -18221,6 +18503,10 @@ class CreateReceiptRuleSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CreateReceiptRuleSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18234,6 +18520,7 @@ class CreateReceiptRuleSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/CreateTemplateCommand.js
+
 
 
 
@@ -18265,6 +18552,10 @@ class CreateTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "CreateTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18278,6 +18569,7 @@ class CreateTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteConfigurationSetCommand.js
+
 
 
 
@@ -18309,6 +18601,10 @@ class DeleteConfigurationSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteConfigurationSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18322,6 +18618,7 @@ class DeleteConfigurationSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteConfigurationSetEventDestinationCommand.js
+
 
 
 
@@ -18353,6 +18650,10 @@ class DeleteConfigurationSetEventDestinationCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteConfigurationSetEventDestination",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18366,6 +18667,7 @@ class DeleteConfigurationSetEventDestinationCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteConfigurationSetTrackingOptionsCommand.js
+
 
 
 
@@ -18397,6 +18699,10 @@ class DeleteConfigurationSetTrackingOptionsCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteConfigurationSetTrackingOptions",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18410,6 +18716,7 @@ class DeleteConfigurationSetTrackingOptionsCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteCustomVerificationEmailTemplateCommand.js
+
 
 
 
@@ -18441,6 +18748,10 @@ class DeleteCustomVerificationEmailTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteCustomVerificationEmailTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18454,6 +18765,7 @@ class DeleteCustomVerificationEmailTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteIdentityCommand.js
+
 
 
 
@@ -18485,6 +18797,10 @@ class DeleteIdentityCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteIdentity",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18498,6 +18814,7 @@ class DeleteIdentityCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteIdentityPolicyCommand.js
+
 
 
 
@@ -18529,6 +18846,10 @@ class DeleteIdentityPolicyCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteIdentityPolicy",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18542,6 +18863,7 @@ class DeleteIdentityPolicyCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteReceiptFilterCommand.js
+
 
 
 
@@ -18573,6 +18895,10 @@ class DeleteReceiptFilterCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteReceiptFilter",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18586,6 +18912,7 @@ class DeleteReceiptFilterCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteReceiptRuleCommand.js
+
 
 
 
@@ -18617,6 +18944,10 @@ class DeleteReceiptRuleCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteReceiptRule",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18630,6 +18961,7 @@ class DeleteReceiptRuleCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteReceiptRuleSetCommand.js
+
 
 
 
@@ -18661,6 +18993,10 @@ class DeleteReceiptRuleSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteReceiptRuleSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18674,6 +19010,7 @@ class DeleteReceiptRuleSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteTemplateCommand.js
+
 
 
 
@@ -18705,6 +19042,10 @@ class DeleteTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18718,6 +19059,7 @@ class DeleteTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DeleteVerifiedEmailAddressCommand.js
+
 
 
 
@@ -18749,6 +19091,10 @@ class DeleteVerifiedEmailAddressCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DeleteVerifiedEmailAddress",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18762,6 +19108,7 @@ class DeleteVerifiedEmailAddressCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DescribeActiveReceiptRuleSetCommand.js
+
 
 
 
@@ -18793,6 +19140,10 @@ class DescribeActiveReceiptRuleSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DescribeActiveReceiptRuleSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18806,6 +19157,7 @@ class DescribeActiveReceiptRuleSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DescribeConfigurationSetCommand.js
+
 
 
 
@@ -18837,6 +19189,10 @@ class DescribeConfigurationSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DescribeConfigurationSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18850,6 +19206,7 @@ class DescribeConfigurationSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DescribeReceiptRuleCommand.js
+
 
 
 
@@ -18881,6 +19238,10 @@ class DescribeReceiptRuleCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DescribeReceiptRule",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18894,6 +19255,7 @@ class DescribeReceiptRuleCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/DescribeReceiptRuleSetCommand.js
+
 
 
 
@@ -18925,6 +19287,10 @@ class DescribeReceiptRuleSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "DescribeReceiptRuleSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18938,6 +19304,7 @@ class DescribeReceiptRuleSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetAccountSendingEnabledCommand.js
+
 
 
 
@@ -18969,6 +19336,10 @@ class GetAccountSendingEnabledCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetAccountSendingEnabled",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -18982,6 +19353,7 @@ class GetAccountSendingEnabledCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetCustomVerificationEmailTemplateCommand.js
+
 
 
 
@@ -19013,6 +19385,10 @@ class GetCustomVerificationEmailTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetCustomVerificationEmailTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19026,6 +19402,7 @@ class GetCustomVerificationEmailTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetIdentityDkimAttributesCommand.js
+
 
 
 
@@ -19057,6 +19434,10 @@ class GetIdentityDkimAttributesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetIdentityDkimAttributes",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19070,6 +19451,7 @@ class GetIdentityDkimAttributesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetIdentityMailFromDomainAttributesCommand.js
+
 
 
 
@@ -19101,6 +19483,10 @@ class GetIdentityMailFromDomainAttributesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetIdentityMailFromDomainAttributes",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19114,6 +19500,7 @@ class GetIdentityMailFromDomainAttributesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetIdentityNotificationAttributesCommand.js
+
 
 
 
@@ -19145,6 +19532,10 @@ class GetIdentityNotificationAttributesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetIdentityNotificationAttributes",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19158,6 +19549,7 @@ class GetIdentityNotificationAttributesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetIdentityPoliciesCommand.js
+
 
 
 
@@ -19189,6 +19581,10 @@ class GetIdentityPoliciesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetIdentityPolicies",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19202,6 +19598,7 @@ class GetIdentityPoliciesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetIdentityVerificationAttributesCommand.js
+
 
 
 
@@ -19233,6 +19630,10 @@ class GetIdentityVerificationAttributesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetIdentityVerificationAttributes",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19246,6 +19647,7 @@ class GetIdentityVerificationAttributesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetSendQuotaCommand.js
+
 
 
 
@@ -19277,6 +19679,10 @@ class GetSendQuotaCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetSendQuota",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19290,6 +19696,7 @@ class GetSendQuotaCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetSendStatisticsCommand.js
+
 
 
 
@@ -19321,6 +19728,10 @@ class GetSendStatisticsCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetSendStatistics",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19334,6 +19745,7 @@ class GetSendStatisticsCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/GetTemplateCommand.js
+
 
 
 
@@ -19365,6 +19777,10 @@ class GetTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "GetTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19378,6 +19794,7 @@ class GetTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ListConfigurationSetsCommand.js
+
 
 
 
@@ -19409,6 +19826,10 @@ class ListConfigurationSetsCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ListConfigurationSets",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19422,6 +19843,7 @@ class ListConfigurationSetsCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ListCustomVerificationEmailTemplatesCommand.js
+
 
 
 
@@ -19453,6 +19875,10 @@ class ListCustomVerificationEmailTemplatesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ListCustomVerificationEmailTemplates",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19466,6 +19892,7 @@ class ListCustomVerificationEmailTemplatesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ListIdentitiesCommand.js
+
 
 
 
@@ -19497,6 +19924,10 @@ class ListIdentitiesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ListIdentities",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19510,6 +19941,7 @@ class ListIdentitiesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ListIdentityPoliciesCommand.js
+
 
 
 
@@ -19541,6 +19973,10 @@ class ListIdentityPoliciesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ListIdentityPolicies",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19554,6 +19990,7 @@ class ListIdentityPoliciesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ListReceiptFiltersCommand.js
+
 
 
 
@@ -19585,6 +20022,10 @@ class ListReceiptFiltersCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ListReceiptFilters",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19598,6 +20039,7 @@ class ListReceiptFiltersCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ListReceiptRuleSetsCommand.js
+
 
 
 
@@ -19629,6 +20071,10 @@ class ListReceiptRuleSetsCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ListReceiptRuleSets",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19642,6 +20088,7 @@ class ListReceiptRuleSetsCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ListTemplatesCommand.js
+
 
 
 
@@ -19673,6 +20120,10 @@ class ListTemplatesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ListTemplates",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19686,6 +20137,7 @@ class ListTemplatesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ListVerifiedEmailAddressesCommand.js
+
 
 
 
@@ -19717,6 +20169,10 @@ class ListVerifiedEmailAddressesCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ListVerifiedEmailAddresses",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19730,6 +20186,7 @@ class ListVerifiedEmailAddressesCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/PutConfigurationSetDeliveryOptionsCommand.js
+
 
 
 
@@ -19761,6 +20218,10 @@ class PutConfigurationSetDeliveryOptionsCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "PutConfigurationSetDeliveryOptions",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19774,6 +20235,7 @@ class PutConfigurationSetDeliveryOptionsCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/PutIdentityPolicyCommand.js
+
 
 
 
@@ -19805,6 +20267,10 @@ class PutIdentityPolicyCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "PutIdentityPolicy",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19818,6 +20284,7 @@ class PutIdentityPolicyCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/ReorderReceiptRuleSetCommand.js
+
 
 
 
@@ -19849,6 +20316,10 @@ class ReorderReceiptRuleSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "ReorderReceiptRuleSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19862,6 +20333,7 @@ class ReorderReceiptRuleSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SendBounceCommand.js
+
 
 
 
@@ -19893,6 +20365,10 @@ class SendBounceCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SendBounce",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19906,6 +20382,7 @@ class SendBounceCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SendBulkTemplatedEmailCommand.js
+
 
 
 
@@ -19937,6 +20414,10 @@ class SendBulkTemplatedEmailCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SendBulkTemplatedEmail",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19950,6 +20431,7 @@ class SendBulkTemplatedEmailCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SendCustomVerificationEmailCommand.js
+
 
 
 
@@ -19981,6 +20463,10 @@ class SendCustomVerificationEmailCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SendCustomVerificationEmail",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -19994,6 +20480,7 @@ class SendCustomVerificationEmailCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SendEmailCommand.js
+
 
 
 
@@ -20025,6 +20512,10 @@ class SendEmailCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SendEmail",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20038,6 +20529,7 @@ class SendEmailCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SendRawEmailCommand.js
+
 
 
 
@@ -20069,6 +20561,10 @@ class SendRawEmailCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SendRawEmail",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20082,6 +20578,7 @@ class SendRawEmailCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SendTemplatedEmailCommand.js
+
 
 
 
@@ -20113,6 +20610,10 @@ class SendTemplatedEmailCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SendTemplatedEmail",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20126,6 +20627,7 @@ class SendTemplatedEmailCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SetActiveReceiptRuleSetCommand.js
+
 
 
 
@@ -20157,6 +20659,10 @@ class SetActiveReceiptRuleSetCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SetActiveReceiptRuleSet",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20170,6 +20676,7 @@ class SetActiveReceiptRuleSetCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SetIdentityDkimEnabledCommand.js
+
 
 
 
@@ -20201,6 +20708,10 @@ class SetIdentityDkimEnabledCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SetIdentityDkimEnabled",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20214,6 +20725,7 @@ class SetIdentityDkimEnabledCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SetIdentityFeedbackForwardingEnabledCommand.js
+
 
 
 
@@ -20245,6 +20757,10 @@ class SetIdentityFeedbackForwardingEnabledCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SetIdentityFeedbackForwardingEnabled",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20258,6 +20774,7 @@ class SetIdentityFeedbackForwardingEnabledCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SetIdentityHeadersInNotificationsEnabledCommand.js
+
 
 
 
@@ -20289,6 +20806,10 @@ class SetIdentityHeadersInNotificationsEnabledCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SetIdentityHeadersInNotificationsEnabled",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20302,6 +20823,7 @@ class SetIdentityHeadersInNotificationsEnabledCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SetIdentityMailFromDomainCommand.js
+
 
 
 
@@ -20333,6 +20855,10 @@ class SetIdentityMailFromDomainCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SetIdentityMailFromDomain",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20346,6 +20872,7 @@ class SetIdentityMailFromDomainCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SetIdentityNotificationTopicCommand.js
+
 
 
 
@@ -20377,6 +20904,10 @@ class SetIdentityNotificationTopicCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SetIdentityNotificationTopic",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20390,6 +20921,7 @@ class SetIdentityNotificationTopicCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/SetReceiptRulePositionCommand.js
+
 
 
 
@@ -20421,6 +20953,10 @@ class SetReceiptRulePositionCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "SetReceiptRulePosition",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20434,6 +20970,7 @@ class SetReceiptRulePositionCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/TestRenderTemplateCommand.js
+
 
 
 
@@ -20465,6 +21002,10 @@ class TestRenderTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "TestRenderTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20478,6 +21019,7 @@ class TestRenderTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/UpdateAccountSendingEnabledCommand.js
+
 
 
 
@@ -20509,6 +21051,10 @@ class UpdateAccountSendingEnabledCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "UpdateAccountSendingEnabled",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20522,6 +21068,7 @@ class UpdateAccountSendingEnabledCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/UpdateConfigurationSetEventDestinationCommand.js
+
 
 
 
@@ -20553,6 +21100,10 @@ class UpdateConfigurationSetEventDestinationCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "UpdateConfigurationSetEventDestination",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20566,6 +21117,7 @@ class UpdateConfigurationSetEventDestinationCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/UpdateConfigurationSetReputationMetricsEnabledCommand.js
+
 
 
 
@@ -20597,6 +21149,10 @@ class UpdateConfigurationSetReputationMetricsEnabledCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "UpdateConfigurationSetReputationMetricsEnabled",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20610,6 +21166,7 @@ class UpdateConfigurationSetReputationMetricsEnabledCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/UpdateConfigurationSetSendingEnabledCommand.js
+
 
 
 
@@ -20641,6 +21198,10 @@ class UpdateConfigurationSetSendingEnabledCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "UpdateConfigurationSetSendingEnabled",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20654,6 +21215,7 @@ class UpdateConfigurationSetSendingEnabledCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/UpdateConfigurationSetTrackingOptionsCommand.js
+
 
 
 
@@ -20685,6 +21247,10 @@ class UpdateConfigurationSetTrackingOptionsCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "UpdateConfigurationSetTrackingOptions",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20698,6 +21264,7 @@ class UpdateConfigurationSetTrackingOptionsCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/UpdateCustomVerificationEmailTemplateCommand.js
+
 
 
 
@@ -20729,6 +21296,10 @@ class UpdateCustomVerificationEmailTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "UpdateCustomVerificationEmailTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20742,6 +21313,7 @@ class UpdateCustomVerificationEmailTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/UpdateReceiptRuleCommand.js
+
 
 
 
@@ -20773,6 +21345,10 @@ class UpdateReceiptRuleCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "UpdateReceiptRule",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20786,6 +21362,7 @@ class UpdateReceiptRuleCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/UpdateTemplateCommand.js
+
 
 
 
@@ -20817,6 +21394,10 @@ class UpdateTemplateCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "UpdateTemplate",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20830,6 +21411,7 @@ class UpdateTemplateCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/VerifyDomainDkimCommand.js
+
 
 
 
@@ -20861,6 +21443,10 @@ class VerifyDomainDkimCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "VerifyDomainDkim",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20874,6 +21460,7 @@ class VerifyDomainDkimCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/VerifyDomainIdentityCommand.js
+
 
 
 
@@ -20905,6 +21492,10 @@ class VerifyDomainIdentityCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "VerifyDomainIdentity",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20918,6 +21509,7 @@ class VerifyDomainIdentityCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/VerifyEmailAddressCommand.js
+
 
 
 
@@ -20949,6 +21541,10 @@ class VerifyEmailAddressCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "VerifyEmailAddress",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
@@ -20962,6 +21558,7 @@ class VerifyEmailAddressCommand extends Command {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/@aws-sdk/client-ses/dist-es/commands/VerifyEmailIdentityCommand.js
+
 
 
 
@@ -20993,6 +21590,10 @@ class VerifyEmailIdentityCommand extends Command {
             commandName,
             inputFilterSensitiveLog: (_) => _,
             outputFilterSensitiveLog: (_) => _,
+            [middleware_SMITHY_CONTEXT_KEY]: {
+                service: "SimpleEmailService",
+                operation: "VerifyEmailIdentity",
+            },
         };
         const { requestHandler } = configuration;
         return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
